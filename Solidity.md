@@ -22,7 +22,7 @@ contract PriceFeed is owned, mortal, priced, named("GoldFeed")
 }
 ```
 
-From the syntax, it will feel mostly similar to something between JavaScript and C++ but with a number of  additions to make it suitable for writing contracts within Ethereum. Language additions include:
+From the syntax, it will feel mostly similar to something between JavaScript and C++ but with a number of  additions to make it suitable for writing contracts within Vapory. Language additions include:
 
 * static typing;
 * property-based language transforms;
@@ -35,7 +35,7 @@ From the syntax, it will feel mostly similar to something between JavaScript and
 
 ### Documentation
 
-It is expected that each method, together with the contract itself, will be documented in several ways. Aside from informal descriptions, each method should come with a formalised method to describe exactly its effect on the state of Ethereum. It should also include, where possible, pre- and post-conditions on the contract state, and the contract itself should include invariants over its own state, again each translated into natural language.
+It is expected that each method, together with the contract itself, will be documented in several ways. Aside from informal descriptions, each method should come with a formalised method to describe exactly its effect on the state of Vapory. It should also include, where possible, pre- and post-conditions on the contract state, and the contract itself should include invariants over its own state, again each translated into natural language.
 
 For GavCoin, a meta coin that that is sub-divisible down to 1,000, and includes two functions `balance` and `send`, we might see the basic, undocumented contract as:
 
@@ -114,7 +114,7 @@ contract GavCoin is named("GavCoin")
 };
 ```
 
-This documentation would then allow the Ethereum browser to translate any message (and thus transaction) going in to this contract into English (and on to other languages hence). It would also allow a lay viewer to immediately discern what the contract conforms to; in this case they could see that it's premined in favour of the transaction sender and that the total amount of coins in the system never changes.
+This documentation would then allow the Vapory browser to translate any message (and thus transaction) going in to this contract into English (and on to other languages hence). It would also allow a lay viewer to immediately discern what the contract conforms to; in this case they could see that it's premined in favour of the transaction sender and that the total amount of coins in the system never changes.
 
 For example, should a DApp, malicious or otherwise, attempt to send a transaction that gives all the user's GAV to itself, the user would, prior to signing and submission, receive a message saying something like:
 

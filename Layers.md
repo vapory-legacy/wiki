@@ -5,15 +5,15 @@ category:
 
 ## Networking daemon
 
-Purpose: the networking daemon must be able to connect to other Ethereum nodes, and accept and share data, so as to serve as the backbone for the Ethereum network. The daemon itself should be as neutral as possible; ideally, it should be useful as part of any currency or cryptographic protocol without modification. It should include anti-DDoS features; perhaps maintain a running score preventing any single IP from making more than one request per second.
+Purpose: the networking daemon must be able to connect to other Vapory nodes, and accept and share data, so as to serve as the backbone for the Vapory network. The daemon itself should be as neutral as possible; ideally, it should be useful as part of any currency or cryptographic protocol without modification. It should include anti-DDoS features; perhaps maintain a running score preventing any single IP from making more than one request per second.
 
 Interface:
 
-1. every time the daemon receives a new message (ie. H(M) is not equal to H(Mprev) for any Mprev received previously), it should send a POST request to http://localhost:<outputport> containing the data, where outputport can be set in the ~/.ethereum/ethereum.conf file (default 1242 if not set)
-2. the daemon should listen on port <inputport>, where inputport can be set in the ~/.ethereum/ethereum.conf file (default 1243 if not set), and if it receives a message in a post request it should push the data out to all connected nodes in the network.
+1. every time the daemon receives a new message (ie. H(M) is not equal to H(Mprev) for any Mprev received previously), it should send a POST request to http://localhost:<outputport> containing the data, where outputport can be set in the ~/.vapory/vapory.conf file (default 1242 if not set)
+2. the daemon should listen on port <inputport>, where inputport can be set in the ~/.vapory/vapory.conf file (default 1243 if not set), and if it receives a message in a post request it should push the data out to all connected nodes in the network.
 Dependencies: internet, bootstrapping nodes
 
-## Ethereum Core
+## Vapory Core
 
 ### Communication layer
 

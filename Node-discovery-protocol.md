@@ -9,5 +9,5 @@ In a nutshell:
 * Defines 4 packet types: _ping_, _pong_, _findnode_ and _neighbors_
 
 See details at either:
-* [devp2p](https://github.com/ethereum/devp2p) repository's [node discovery protocol](https://github.com/ethereum/devp2p/blob/master/rlpx.md) page
-* [go-ethereum](https://github.com/ethereum/go-ethereum) repository's [node discovery protocol](https://github.com/ethereum/go-ethereum/wiki/RLPx-----Node-Discovery-Protocol) page
+* [devp2p](https://github.com/vaporyco/devp2p) repository's [node discovery protocol](https://github.com/vaporyco/devp2p/blob/master/rlpx.md) page
+* [go-vapory](https://github.com/vaporyco/go-vapory) repository's [node discovery protocol](https://github.com/vaporyco/go-vapory/wiki/RLPx-----Node-Discovery-Protocol) page

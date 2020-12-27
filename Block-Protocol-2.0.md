@@ -3,7 +3,7 @@ name: Block Protocol 2.0
 category: 
 ---
 
-One of the main criticisms that has been made of Ethereum, and Bitcoin-like blockchain protocols in general, is the issue of scalability. Although Bitcoin's core developers, and other platforms such as Ripple, have continued to make iterative improvements to the way that the blockchain is stored, including innovations such as separating the state ("ledger" or "UTXO set") from the transaction list or using separate data structures to store the two on disk/memory, fundamentally no one has successfully implemented any way to improve upon the fundamental limitation that every full node must process every transaction. At this point, Ethereum also does not solve this problem. However, the block protocol described here, and specifically the stack trace mechanism, allows for secure "light nodes" to exist, which download only the headers of every block and not the full transaction set but maintain the same security level for their users as full nodes under the much weaker assumption that at least one node with non-negligible (ie. >0.01%) mining power or ether inside the system is honest.
+One of the main criticisms that has been made of Vapory, and Bitcoin-like blockchain protocols in general, is the issue of scalability. Although Bitcoin's core developers, and other platforms such as Ripple, have continued to make iterative improvements to the way that the blockchain is stored, including innovations such as separating the state ("ledger" or "UTXO set") from the transaction list or using separate data structures to store the two on disk/memory, fundamentally no one has successfully implemented any way to improve upon the fundamental limitation that every full node must process every transaction. At this point, Vapory also does not solve this problem. However, the block protocol described here, and specifically the stack trace mechanism, allows for secure "light nodes" to exist, which download only the headers of every block and not the full transaction set but maintain the same security level for their users as full nodes under the much weaker assumption that at least one node with non-negligible (ie. >0.01%) mining power or ether inside the system is honest.
 
 ### Data definitions
 
@@ -52,7 +52,7 @@ Where:
 
 Each transaction and uncle block header is itself provided directly in the form of a list, not in a serialized form. `uncle_list` and `transaction_list` are the lists of the uncle block headers and transactions in the block, respectively. Note that the block number, difficulty and timestamp are integers, and therefore cannot have leading zeroes; `extra_data` and `nonce` can be byte arrays of at most 32 bytes, NOT lists, although this particular check should not be performed for the genesis block where the `extra_data` field will take up many kilobytes.
 
-The `state_root` is the root of a [Patricia Tree](https://github.com/ethereum/wiki/wiki/%5BEnglish%5D-Patricia-Tree) containing (key, value) pairs for all accounts where each address is represented as a 20-byte binary string. At the address of each account, the value stored in the Merkle Patricia tree is a string which is the RLP-serialized form of an object of the form:
+The `state_root` is the root of a [Patricia Tree](https://github.com/vaporyco/wiki/wiki/%5BEnglish%5D-Patricia-Tree) containing (key, value) pairs for all accounts where each address is represented as a 20-byte binary string. At the address of each account, the value stored in the Merkle Patricia tree is a string which is the RLP-serialized form of an object of the form:
 
     [ balance, nonce, contract_root ]
 
@@ -115,7 +115,7 @@ The mining function is tentative, and will be replaced once we know that we have
 
 ### Mining Process
 
-![Mining Process](https://www.ethereum.org/gh_wiki/500px-Minerchart3.png)
+![Mining Process](https://www.vapory.org/gh_wiki/500px-Minerchart3.png)
 
 
 When mining a block, a miner goes through the following process:
@@ -160,7 +160,7 @@ When mining a block, a miner goes through the following process:
 
 ### Block Validation Algorithm
 
-![Mining Process](https://www.ethereum.org/gh_wiki/500px-Minerchart2.png)
+![Mining Process](https://www.vapory.org/gh_wiki/500px-Minerchart2.png)
 
 1- Take as inputs:
 
@@ -214,9 +214,9 @@ If a block is valid, determine TD(block) (&quot;total difficulty&quot;) for the 
 
 ### Semi-collaborative Block Validation Via Challenge-Response Protocol
 
-In Ethereum, a ''light node'' can be defined as a node that accepts block headers, and performs the verifications in (2) with the exception of the transaction and stacktrace trie hash verifications but does not perform the verifications in (4) and (6), similar to the headers-only verification that light nodes do in Bitcoin. Light nodes would thus store the state roots, and perhaps some portion of the state, but not the entire state. If a light node wants to know the balance or contract state of a given account, it can request the value from other nodes in the network alongside the minimal subset of Patricia tree nodes that prove that the given key/value pair is actually in the state.
+In Vapory, a ''light node'' can be defined as a node that accepts block headers, and performs the verifications in (2) with the exception of the transaction and stacktrace trie hash verifications but does not perform the verifications in (4) and (6), similar to the headers-only verification that light nodes do in Bitcoin. Light nodes would thus store the state roots, and perhaps some portion of the state, but not the entire state. If a light node wants to know the balance or contract state of a given account, it can request the value from other nodes in the network alongside the minimal subset of Patricia tree nodes that prove that the given key/value pair is actually in the state.
 
-Although Ethereum cannot run without at least some full nodes processing and verifying every transaction that takes place in the network, this block protocol is designed to provide a somewhat weaker assurance: as long as at least one honest full node exists, light clients can be just as secure and provide the same incentives toward decentralization that full nodes do. The mechanism relies on a challenge-response protocol in which a full node can, subject to certain conditions, submit a challenge that a certain part of a block is invalid, and it would be up to the miner (or another good samaritan node) to provide a response which light nodes can then efficiently verify. If a challenge goes uncontested, then light nodes would distrust the block.
+Although Vapory cannot run without at least some full nodes processing and verifying every transaction that takes place in the network, this block protocol is designed to provide a somewhat weaker assurance: as long as at least one honest full node exists, light clients can be just as secure and provide the same incentives toward decentralization that full nodes do. The mechanism relies on a challenge-response protocol in which a full node can, subject to certain conditions, submit a challenge that a certain part of a block is invalid, and it would be up to the miner (or another good samaritan node) to provide a response which light nodes can then efficiently verify. If a challenge goes uncontested, then light nodes would distrust the block.
 
 In the validation algorithm described in the previous section, note that there are a few specific places where a block can fail:
 
@@ -252,4 +252,4 @@ The protocol altogether can be shown to be incentive-compatible as follows:
 
 ### Comparison with Bitcoin
 
-In Bitcoin, one can create a challenge-response protocol to achieve similar functionality along very similar principles, but there is one key way in which such a protocol in Bitcoin would be inadequate: miner fees. Because Bitcoin does not include a Merkle-tree mechanism for adding up transaction fees, the only way to prove that a block has a certain quantity of transaction fees is to process every transaction. Furthermore, in Bitcoin transaction fees all go to the miner. Thus, in Bitcoin a light node has no way of knowing if a given block is valid or if it gives its creator excessive fees, and can only rely on the computational majority as a source of information for this. In Ethereum, all changes to the state are incorporated into the stacktrace, so this weakness does not exist and, given the weak security assumption that at least one full node with at least 0.01% mining power or stake is honest, have 100% of the security properties that full nodes have.
+In Bitcoin, one can create a challenge-response protocol to achieve similar functionality along very similar principles, but there is one key way in which such a protocol in Bitcoin would be inadequate: miner fees. Because Bitcoin does not include a Merkle-tree mechanism for adding up transaction fees, the only way to prove that a block has a certain quantity of transaction fees is to process every transaction. Furthermore, in Bitcoin transaction fees all go to the miner. Thus, in Bitcoin a light node has no way of knowing if a given block is valid or if it gives its creator excessive fees, and can only rely on the computational majority as a source of information for this. In Vapory, all changes to the state are incorporated into the stacktrace, so this weakness does not exist and, given the weak security assumption that at least one full node with at least 0.01% mining power or stake is honest, have 100% of the security properties that full nodes have.

@@ -3,7 +3,7 @@ name: Solidity Docs and ABI
 category: 
 ---
 
-*NOTE: This is intended largely as a vague overview and a historical reference. For specific details and the latest specification, see [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI), [Ethereum Natural Specification Format](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format) and [Solidity Tutorial](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial).*
+*NOTE: This is intended largely as a vague overview and a historical reference. For specific details and the latest specification, see [Vapory Contract ABI](https://github.com/vaporyco/wiki/wiki/Vapory-Contract-ABI), [Vapory Natural Specification Format](https://github.com/vaporyco/wiki/wiki/Vapory-Natural-Specification-Format) and [Solidity Tutorial](https://github.com/vaporyco/wiki/wiki/Solidity-Tutorial).*
 
 An ABI is intended to serve as the de facto method for encoding & decoding data into & out of transactions.
 
@@ -21,7 +21,7 @@ state:
 }
 ```
 
-Note you haven't seen this language before. This is a new high level language codenamed Solidity, that will feel mostly similar to something between JavaScript and C++ but with a number of syntactic additions to make it suitable for writing contracts within Ethereum. Language additions include:
+Note you haven't seen this language before. This is a new high level language codenamed Solidity, that will feel mostly similar to something between JavaScript and C++ but with a number of syntactic additions to make it suitable for writing contracts within Vapory. Language additions include:
 
 * static typing;
 * contracts as first-class entities;
@@ -68,11 +68,11 @@ In previous versions of the proof-of-concept series, only simple 32-byte values 
 
 ### ABI
 
-See [Ethereum Contract ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI).
+See [Vapory Contract ABI](https://github.com/vaporyco/wiki/wiki/Vapory-Contract-ABI).
 
 ### Documentation
 
-It is expected that each method, together with the contract itself, will be documented in several ways. Aside from informal descriptions, each method should come with a formalised method to describe exactly its effect on the state of Ethereum. It should also include, where possible, pre- and post-conditions on the contract state, and the contract itself should include invariants over its own state, again each translated into natural language.
+It is expected that each method, together with the contract itself, will be documented in several ways. Aside from informal descriptions, each method should come with a formalised method to describe exactly its effect on the state of Vapory. It should also include, where possible, pre- and post-conditions on the contract state, and the contract itself should include invariants over its own state, again each translated into natural language.
 
 For GavCoin, a meta coin that that is sub-divisible down to 1,000, and includes two functions `balance` and `send`, we might see the basic, undocumented contract as:
 
@@ -154,7 +154,7 @@ state:
 };
 ```
 
-This documentation would then allow the Ethereum browser to translate any message (and thus transaction) going in to this contract into English (and on to other languages hence). It would also allow a lay viewer to immediately discern what the contract conforms to; in this case they could see that it's premined in favour of the transaction sender and that the total amount of coins in the system never changes.
+This documentation would then allow the Vapory browser to translate any message (and thus transaction) going in to this contract into English (and on to other languages hence). It would also allow a lay viewer to immediately discern what the contract conforms to; in this case they could see that it's premined in favour of the transaction sender and that the total amount of coins in the system never changes.
 
 For example, should a DApp, malicious or otherwise, attempt to send a transaction that gives all the user's GAV to itself, the user would, prior to signing and submission, receive a message saying something like:
 
@@ -213,7 +213,7 @@ The full documentation format, that includes developer-specific documentation in
 }
 ```
 
-This file would be hashed and distributed (either on a centralised website or, more preferably, through Swarm). It would be referenced by the Ethereum Singleton Trust contract in order to allow people or organisations that you know or trust to help inform you of its audit results and trustworth. Of course if you were a coder you could audit it manually (in this case it's pretty trivial) and determine how well the formal documentation matches the code, and also submit newer versions, perhaps in different languages that incorporate changes you feel are required to better descibe its actions & ramifications.
+This file would be hashed and distributed (either on a centralised website or, more preferably, through Swarm). It would be referenced by the Vapory Singleton Trust contract in order to allow people or organisations that you know or trust to help inform you of its audit results and trustworth. Of course if you were a coder you could audit it manually (in this case it's pretty trivial) and determine how well the formal documentation matches the code, and also submit newer versions, perhaps in different languages that incorporate changes you feel are required to better descibe its actions & ramifications.
 
 ### The ABI-Description File
 

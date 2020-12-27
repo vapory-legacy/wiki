@@ -3,30 +3,30 @@ name: Contract Metadata Docs
 category: 
 ---
 
-This is the main entry point for NatSpec and generally details a safe and efficient _standard_ for ethereum contract metadata distribution.
+This is the main entry point for NatSpec and generally details a safe and efficient _standard_ for vapory contract metadata distribution.
 
-By metadata we mean all information related to a contract that is thought to be relevant to and immutably linked to a specific version of a contract on the ethereum blockchain.
+By metadata we mean all information related to a contract that is thought to be relevant to and immutably linked to a specific version of a contract on the vapory blockchain.
 This includes:
 
 * Contract source code
-* [ABI definition](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) 
-* [NatSpec user doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format#user-documentation)
-* [NatSpec developer's doc](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format#developer-documentation)
+* [ABI definition](https://github.com/vaporyco/wiki/wiki/Vapory-Contract-ABI) 
+* [NatSpec user doc](https://github.com/vaporyco/wiki/wiki/Vapory-Natural-Specification-Format#user-documentation)
+* [NatSpec developer's doc](https://github.com/vaporyco/wiki/wiki/Vapory-Natural-Specification-Format#developer-documentation)
 
 These resources have their _standard specification_ in json format, ideally meant to be produced by IDE infrastructures or compilers directly.
 
-For instance, the [solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) compiler offers a `doxygen` style way of specifying natspec with inline smart comments. Upon compilation it creates both NatSpec user doc as well ABI definition. But note that there is nothing inherently solidity specific about these data, and other contract languages are encouraged to implement their NatSpec/ABI support potentially with IDE-s extending it.
+For instance, the [solidity](https://github.com/vaporyco/wiki/wiki/Solidity-Tutorial) compiler offers a `doxygen` style way of specifying natspec with inline smart comments. Upon compilation it creates both NatSpec user doc as well ABI definition. But note that there is nothing inherently solidity specific about these data, and other contract languages are encouraged to implement their NatSpec/ABI support potentially with IDE-s extending it.
 
-Since DAPPs and IDEs will typically want to interact with these resources, standardising their deployment and distribution is important for a smooth ethereum experience. 
+Since DAPPs and IDEs will typically want to interact with these resources, standardising their deployment and distribution is important for a smooth vapory experience. 
 
-A specially important example of this is the **NatSpec transaction confirmation notice scheme**, which we will use to illustrate the point. However, the strategy described here trivially extends to arbitrary immutable metadata fixed to an ethereum contract. 
+A specially important example of this is the **NatSpec transaction confirmation notice scheme**, which we will use to illustrate the point. However, the strategy described here trivially extends to arbitrary immutable metadata fixed to an vapory contract. 
 
 # Transaction Confirmation Notice
 
 The NatSpec user doc allows contract creators to attach custom confirmation notices to each method.
 A powerful feature of NatSpec is to provide templating which allows parts of the user notice to be instantiated depending on the parameters of the actual transaction sent to the contract. 
 
-Trusted ethereum client implementations are required to call back from their backend instantiating the natspec transaction notice from actual transaction data and present it to the user for confirmation. 
+Trusted vapory client implementations are required to call back from their backend instantiating the natspec transaction notice from actual transaction data and present it to the user for confirmation. 
 
 This serves as a first line of defense against illegitimate transactions sent by malicious DAPPs in the user's name.
 
@@ -41,19 +41,19 @@ Let's see how this is achieved.
 **Proposal**
 The metadocs are assumed to be in a single JSON structure called `cmd` file, that stands for _contract metadata doc_.
 
-The `cmd` file's content is hashed and content hash is registered on a name registry via a contract on the ethereum blockchain under the code hash, see https://github.com/ethereum/dapp-bin/blob/master/NatSpecReg/contract.sol _Registering_ in this context will simply mean a key value pair is recorded in an immutable contract storage as a result of a transaction sent to the registry contract.
+The `cmd` file's content is hashed and content hash is registered on a name registry via a contract on the vapory blockchain under the code hash, see https://github.com/vaporyco/dapp-bin/blob/master/NatSpecReg/contract.sol _Registering_ in this context will simply mean a key value pair is recorded in an immutable contract storage as a result of a transaction sent to the registry contract.
 
 This provides a public immutable authentication for contract metadata, since:
-- the authenticity of the link between the contract and metadata is secured by ethereum consensus
+- the authenticity of the link between the contract and metadata is secured by vapory consensus
 - the authenticity of actual metadata content is secured by content hashing
 - the binding is tamper proof 
 
 
 DAPP IDE environments are supposed to support the functionality, that when you create a contract, all its standard metadata is 
 - bundled in a single `cmd` json file
-- compiled source code is keccak hashed -> `Sha3(<evmcode>)`
+- compiled source code is keccak hashed -> `Sha3(<vvmcode>)`
 - `cmd` json is keccak hashed -> `Sha3(<cmdjson>)`
-- the metadata is registered with the contract by sending a transaction to a trusted name registry. The transaction simply records `Sha3(<evmcode>) -> Sha3(<cmdjson>)` as a key value pair in contract storage.
+- the metadata is registered with the contract by sending a transaction to a trusted name registry. The transaction simply records `Sha3(<vvmcode>) -> Sha3(<cmdjson>)` as a key value pair in contract storage.
 
 In order to avoid malicious agents hijacking metadata by overwriting the namereg entry, we propose the following business process:
 
@@ -61,7 +61,7 @@ In order to avoid malicious agents hijacking metadata by overwriting the namereg
 - before the corresponding contract is deployed, we check if the correct metadata bundle is found in the registry and confirmed to a satisfying level of certainty (X blocks).
 
 How it looks like in `Alethzero` is illustrated [here]|(
-https://github.com/ethereum/wiki/wiki/NatSpec-Example)
+https://github.com/vaporyco/wiki/wiki/NatSpec-Example)
 
 ## Metadata Access
 
@@ -81,7 +81,7 @@ This functionality of uploading and registering location is supposed to be also 
 
 (surely with old web urls, we are always exposed to server failure/hacking, etc)
 
-Read more [here](https://github.com/ethereum/wiki/wiki/NatSpec-Determination)
+Read more [here](https://github.com/vaporyco/wiki/wiki/NatSpec-Determination)
 
 ## Name registry contracts
 

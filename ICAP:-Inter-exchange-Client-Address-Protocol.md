@@ -3,7 +3,7 @@ name: ICAP Inter Exchange Client Address Protocol
 category: 
 ---
 
-Transferring funds between third-party accounts, especially those of exchanges, places considerable burden on the user and is error prone, due to the way in which deposits are identified to the client account. This problem was tackled by the existing banking industry through having a common code known as *IBAN*. This code amalgamated the institution and client account along with a error-detection mechanism practically eliminating trivial errors and providing considerable convenience for the user. Unfortunately, this is a heavily regulated and centralised service accessible only to large, well-established institutions. The present protocol, ICAP, may be viewed as a decentralised version of it suitable for any institutions containing funds on the Ethereum system.
+Transferring funds between third-party accounts, especially those of exchanges, places considerable burden on the user and is error prone, due to the way in which deposits are identified to the client account. This problem was tackled by the existing banking industry through having a common code known as *IBAN*. This code amalgamated the institution and client account along with a error-detection mechanism practically eliminating trivial errors and providing considerable convenience for the user. Unfortunately, this is a heavily regulated and centralised service accessible only to large, well-established institutions. The present protocol, ICAP, may be viewed as a decentralised version of it suitable for any institutions containing funds on the Vapory system.
 
 ### IBAN
 
@@ -21,7 +21,7 @@ For the UK, the BBAN is composed of:
 
 # Proposed Design
 
-Introduce a new IBAN country code: *XE*, formulated as the Ethereum *E* prefixed with the "extended" *X*, as used in non-jurisdictional currencies (e.g. XRP, XCP).
+Introduce a new IBAN country code: *XE*, formulated as the Vapory *E* prefixed with the "extended" *X*, as used in non-jurisdictional currencies (e.g. XRP, XCP).
 
 There will be three BBAN possibilities for this code; *direct*, *basic* and *indirect*.
 
@@ -29,7 +29,7 @@ There will be three BBAN possibilities for this code; *direct*, *basic* and *ind
 
 The BBAN for this code when direct will be 30 characters and will comprise one field:
 
-- Account identifier, 30 characters alphanumeric (< 155-bit). This will be interpreted as a big-endian encoded base-36 integer representing the least significant bits of a 160-bit Ethereum address. As such, these Ethereum addresses will generally begin with a zero byte.
+- Account identifier, 30 characters alphanumeric (< 155-bit). This will be interpreted as a big-endian encoded base-36 integer representing the least significant bits of a 160-bit Vapory address. As such, these Vapory addresses will generally begin with a zero byte.
 
 e.g. XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS corresponds to the address `00c5496aee77c1ba1f0854206a26dda82a81d6d8`.
 
@@ -37,7 +37,7 @@ e.g. XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS corresponds to the address `00c5496aee77
 
 The same as the direct encoding, except that the code is 31 characters (making it non-compliant for IBAN) and composes the same, single, field:
 
-- Account identifier, 31 characters alphanumeric (< 161-bit). This will be interpreted as a big-endian encoded base-36 integer representing a 160-bit Ethereum address.
+- Account identifier, 31 characters alphanumeric (< 161-bit). This will be interpreted as a big-endian encoded base-36 integer representing a 160-bit Vapory address.
 
 #### Indirect 
 
@@ -55,11 +55,11 @@ XE81ETHXREGGAVOFYORK
 
 Split into:
 
-- `XE` The country code for Ethereum;
+- `XE` The country code for Vapory;
 - `66` The checksum;
-- `ETH` The asset identifier within the client account - in this case, "ETH" is the only valid asset identifier, since Ethereum's base registry contract supports only this asset;
-- `XREG` The institution code for the account - in this case, Ethereum's base registry contract;
-- `GAVOFYORK` The client identifier within the institution - in this case, a direct payment with no additional data to whatever primary address is associated with the name "GAVOFYORK" in Ethereum's base registry contract;
+- `ETH` The asset identifier within the client account - in this case, "ETH" is the only valid asset identifier, since Vapory's base registry contract supports only this asset;
+- `XREG` The institution code for the account - in this case, Vapory's base registry contract;
+- `GAVOFYORK` The client identifier within the institution - in this case, a direct payment with no additional data to whatever primary address is associated with the name "GAVOFYORK" in Vapory's base registry contract;
 
 ## Notes
 
@@ -83,7 +83,7 @@ A QR code may be generated directly from the URI using standard QR encodings. Fo
 
 # Transaction Semantics
 
-The mechanism for indirect asset transfer over three routing protocols are specified, all of which are specific to the Ethereum domain (country-code of `XE`). One is for currency transfers directly to an included address ("direct"), another is for clients with the system address found through a Registry-lookup system of the client-ID, denoted by asset class `ETH`, whereas the last is for transfers to an intermediary with associated data to specify client, denoted by asset class `XET` (the latter two are "indirect").
+The mechanism for indirect asset transfer over three routing protocols are specified, all of which are specific to the Vapory domain (country-code of `XE`). One is for currency transfers directly to an included address ("direct"), another is for clients with the system address found through a Registry-lookup system of the client-ID, denoted by asset class `ETH`, whereas the last is for transfers to an intermediary with associated data to specify client, denoted by asset class `XET` (the latter two are "indirect").
 
 ## Direct
 
@@ -91,19 +91,19 @@ If the IBAN code is 34 characters, it is a direct address; a direct transfer is 
 
 ## Indirect ETH Asset: Simple transfers
 
-Within the ETH asset code of Ethereum's country-code (XE), i.e. as long as the code begins with `XE**ETH` (where `**` is the valid checksum), then we can define the required transaction to be the deposit address given by a call to the *registry contract* denoted by the institution code. For institutions not beginning with `X`, this corresponds to the primary address associated with the *Ethereum standard name*:
+Within the ETH asset code of Vapory's country-code (XE), i.e. as long as the code begins with `XE**ETH` (where `**` is the valid checksum), then we can define the required transaction to be the deposit address given by a call to the *registry contract* denoted by the institution code. For institutions not beginning with `X`, this corresponds to the primary address associated with the *Vapory standard name*:
 
 [institution code] `/` [client identifier]
 
-The *Ethereum standard name* is simply the normal hierarchical lookup mechanism, as specified in the Ethereum standard interfaces document.
+The *Vapory standard name* is simply the normal hierarchical lookup mechanism, as specified in the Vapory standard interfaces document.
 
-We define a *registry contract* as a contract fulfilling the Registry interface as specified in the Ethereum standard interfaces document.
+We define a *registry contract* as a contract fulfilling the Registry interface as specified in the Vapory standard interfaces document.
 
 **TODO**: JS code for specifying the transfer.
 
 ## Indirect XET Asset: Institution transfers
 
-For the `XET` asset code within the Ethereum country code (i.e. while the code begins XE**XET), then we can derive the transaction that must be made through a lookup to the Ethereum `iban` registry contract. For a given institution, this contract specifies two values: the deposit call signature hash and the institution's Ethereum address.
+For the `XET` asset code within the Vapory country code (i.e. while the code begins XE**XET), then we can derive the transaction that must be made through a lookup to the Vapory `iban` registry contract. For a given institution, this contract specifies two values: the deposit call signature hash and the institution's Vapory address.
 
 At present, only a single such deposit call is defined, which is:
 
@@ -111,6 +111,6 @@ At present, only a single such deposit call is defined, which is:
 function deposit(uint64 clientAccount)
 ```
 
-whose signature hash is `0x13765838`. The transaction to transfer the assets should be formed as an ether-laden call to the institution's Ethereum address using the `deposit` method as specified above, with the client account determined through the value of the big-endian, base-36 interpretation of the alpha-numeric *Institution client identifier*, literally using the value of the characters `0` to `9`, then evaluating 'A' (or 'a') as 10, 'B' (or 'b') as 11 and so forth.
+whose signature hash is `0x13765838`. The transaction to transfer the assets should be formed as an ether-laden call to the institution's Vapory address using the `deposit` method as specified above, with the client account determined through the value of the big-endian, base-36 interpretation of the alpha-numeric *Institution client identifier*, literally using the value of the characters `0` to `9`, then evaluating 'A' (or 'a') as 10, 'B' (or 'b') as 11 and so forth.
 
 **TODO**: JS code for specifying the transfer.

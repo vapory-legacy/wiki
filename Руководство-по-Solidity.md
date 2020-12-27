@@ -1,8 +1,8 @@
-_исходный текст [Solidity Tutorial](https://ethereum.github.io/solidity/docs/home/), 05.10.2015_
+_исходный текст [Solidity Tutorial](https://vapory.github.io/solidity/docs/home/), 05.10.2015_
 ***
-Solidity - это высокоуровневый язык для виртуальной машины Ethereum с синтаксисом, похожим на JavaScript. Это учебное руководство обеспечивает основное введение в Solidity и предполагает некоторое знание Виртуальной машины Ethereum и программирования в целом. Оно не касается таких функций как [естественная спецификация языка](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial/Ethereum-Natural-Specification-Format) или формальная верификация и не является заключительной спецификацией языка.
+Solidity - это высокоуровневый язык для виртуальной машины Vapory с синтаксисом, похожим на JavaScript. Это учебное руководство обеспечивает основное введение в Solidity и предполагает некоторое знание Виртуальной машины Vapory и программирования в целом. Оно не касается таких функций как [естественная спецификация языка](https://github.com/vaporyco/wiki/wiki/Solidity-Tutorial/Vapory-Natural-Specification-Format) или формальная верификация и не является заключительной спецификацией языка.
 
-Можно начать использовать [Solidity в браузере](http://chriseth.github.io/cpp-ethereum) без потребности загружать или компилировать что-либо. Это приложение только поддерживает компиляцию - если Вы хотите выполнить код или ввести его в блокчейн, необходимо использовать клиент, такой как например [Geth](https://github.com/ethereum/go-ethereum) или [AlethZero](https://github.com/ethereum/alethzero).
+Можно начать использовать [Solidity в браузере](http://chriseth.github.io/cpp-vapory) без потребности загружать или компилировать что-либо. Это приложение только поддерживает компиляцию - если Вы хотите выполнить код или ввести его в блокчейн, необходимо использовать клиент, такой как например [Gvap](https://github.com/vaporyco/go-vapory) или [AlethZero](https://github.com/vaporyco/alethzero).
 
 
 **Быстрые ссылки:**
@@ -137,7 +137,7 @@ contract Coin {
 Обратите внимание на то, что компилятор в браузере поддерживает не больше одного файла и если Вы используете компилятор командной строки, необходимо явно указать все файлы, которые Вы будете использовать в качестве параметров, компилятор не будет ничего искать в Вашей файловой системе самостоятельно.
 
 **Комментарии** однострочные комментарии (`//`) и многострочные комментарии (`/*...*/`)возможны, в то время как тройная наклонная черта (`///`) справа перед объявлениями функции производит комментарий
-[NatSpec](Ethereum-Natural-Specification-Format) (Комментарии NatSepc не освещены здесь).
+[NatSpec](Vapory-Natural-Specification-Format) (Комментарии NatSepc не освещены здесь).
 
 # Структура контракта Solidity
 
@@ -166,7 +166,7 @@ Solidity является статически типизированным яз
 Арифметические операторы: `+`, `-`, унарный `-`, унарный `+`, `*`, `/`, `%` (Деление с остатком (деление по модулю) ), `**` (Возведение в степень)
 
 **Адресный тип**  
-`address`: Содержит 20 байтное значение (размер адреса Ethereum). Адресный тип также имеет члены(см. [Функции на адреса](#Функции-на-адреса)) и служит основой для всех контрактов.
+`address`: Содержит 20 байтное значение (размер адреса Vapory). Адресный тип также имеет члены(см. [Функции на адреса](#Функции-на-адреса)) и служит основой для всех контрактов.
 
 Операторы:  
 `<=`, `<`, `==`, `!=`, `>=` и `>`.
@@ -557,7 +557,7 @@ namespace and are mainly used to provide information about the blockchain.
 
 ### Cryptographic Functions
 
- - `sha3(...) returns (bytes32)`: compute the Ethereum-SHA-3 hash of the (tightly packed) arguments
+ - `sha3(...) returns (bytes32)`: compute the Vapory-SHA-3 hash of the (tightly packed) arguments
  - `sha256(...) returns (bytes32)`: compute the SHA-256 hash of the (tightly packed) arguments
  - `ripemd160(...) returns (bytes20)`: compute RIPEMD-160 hash of the (tightly packed) arguments
  - `ecrecover(bytes32, byte, bytes32, bytes32) returns (address)`: recover public key from elliptic curve signature - arguments are (data, v, r, s)
@@ -1076,7 +1076,7 @@ Here, the call to `Deposit` will behave identical to
 
 ### Additional Resources for Understanding Events:
 
-- Javascript documentation: <https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events>
+- Javascript documentation: <https://github.com/vaporyco/wiki/wiki/JavaScript-API#contract-events>
 - Example usage of events: <https://github.com/debris/smart-exchange/blob/master/lib/contracts/SmartExchange.sol>
 - How to access them in js: <https://github.com/debris/smart-exchange/blob/master/lib/exchange_transactions.js>
 
@@ -1212,7 +1212,7 @@ Unfortunately, there are some subtleties the compiler does not yet warn you abou
  - `now` (`uint`): current block timestamp (alias for `block.timestamp`)
  - `tx.gasprice` (`uint`): gas price of the transaction
  - `tx.origin` (`address`): sender of the transaction (full call chain)
- - `sha3(...) returns (bytes32)`: compute the Ethereum-SHA3 hash of the (tightly packed) arguments
+ - `sha3(...) returns (bytes32)`: compute the Vapory-SHA3 hash of the (tightly packed) arguments
  - `sha256(...) returns (bytes32)`: compute the SHA256 hash of the (tightly packed) arguments
  - `ripemd160(...) returns (bytes20)`: compute RIPEMD of 256 the (tightly packed) arguments
  - `ecrecover(bytes32, byte, bytes32, bytes32) returns (address)`: recover public key from elliptic curve signature
@@ -1251,6 +1251,6 @@ TODO
 ***
 
 _Большое спасибо General-Beck Денис Солдатову за перевод._
-_Другие переводы от Дениса на тему Ethereum можно найти [здесь](http://general-beck.info/component/tags/tag/98-ethereum)_ 
+_Другие переводы от Дениса на тему Vapory можно найти [здесь](http://general-beck.info/component/tags/tag/98-vapory)_ 
 
 _Note: This page is under construction_

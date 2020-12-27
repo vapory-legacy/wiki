@@ -5,21 +5,21 @@ category:
 
 # This page is not actively maintained.
 
-The current Solidity documentation can be found at http://ethereum.github.io/solidity/
+The current Solidity documentation can be found at http://vapory.github.io/solidity/
 
 # Foreword
 
-Solidity is roughly speaking, an object-oriented language designed for writing contracts in Ethereum. Contracts are (typically) small programs which govern the behaviour of accounts within the Ethereum state. These programs operate within the context of the Ethereum environment. Such accounts are able to pass messages between themselves as well as doing practically Turing complete computation.
+Solidity is roughly speaking, an object-oriented language designed for writing contracts in Vapory. Contracts are (typically) small programs which govern the behaviour of accounts within the Vapory state. These programs operate within the context of the Vapory environment. Such accounts are able to pass messages between themselves as well as doing practically Turing complete computation.
 
 Solidity is perhaps the first example of a *contract-oriented* programming language; a slight tweak on the notion of object-orientation. While closely related to object-oriented languages, this is a language designed specifically to help express agreements that must encode ideas and relationships relevant to Real Life, or some formal model thereof. As such we see notions such as ownership, identity, protections and restrictions forming a core part of the vocabulary and idiomatic grammar.
 
-We see language grammar actually tieing in with many of the aspects of this: the `event` primitives along with the `indexed` keyword explicitly address the logging environment which Ethereum provides. The variadic return values mimic the fact that output data of Ethereum's calling mechanism is, like the input data, an arbitrary byte array.
+We see language grammar actually tieing in with many of the aspects of this: the `event` primitives along with the `indexed` keyword explicitly address the logging environment which Vapory provides. The variadic return values mimic the fact that output data of Vapory's calling mechanism is, like the input data, an arbitrary byte array.
 
 # Basic Contract Anatomy
 
 ## Hello, World!
 
-No language would be complete without a Hello World program. Operating within the Ethereum environment, Solidity has no obvious way of "outputting" a string. The closest we can do is to use a log event to place a string into the blockchain:
+No language would be complete without a Hello World program. Operating within the Vapory environment, Solidity has no obvious way of "outputting" a string. The closest we can do is to use a log event to place a string into the blockchain:
 
 ```
 contract HelloWorld {
@@ -41,7 +41,7 @@ contract MostBasicContract {
 }
 ```
 
-It doesn't do anything. To make it do something when it receives a message, we can introduce a function. The function you've already seen is the so-called default function. Why this is default will be properly explained later, but for now, suffice it to say that it is simply the function that gets called when this contract (well, an instantiation of it, anyway) receives a message from the Ethereum Environment.
+It doesn't do anything. To make it do something when it receives a message, we can introduce a function. The function you've already seen is the so-called default function. Why this is default will be properly explained later, but for now, suffice it to say that it is simply the function that gets called when this contract (well, an instantiation of it, anyway) receives a message from the Vapory Environment.
 
 The syntax of a function is similar to Javascript: it begins with the `function` keyword, then has a parenthesised parameter list, and finally has a braced expression block.
 

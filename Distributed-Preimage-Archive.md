@@ -7,7 +7,7 @@ category:
 
 DPA stores small pieces of information (preimage objects, arbitrary strings of bytes of limited length) retrievable by their (cryptographic) hash value. Thus, preimage objects stored in DPA have implicit integrity protection. The hash function used for key assignment is assumed to be collision-free, meaning that colliding keys for different preimage objects are assumed to be practically impossible.
 
-DPA serves as a fast, redundant store optimized for speedy retrieval and long-term reliability. Its most frequent use within Ethereum is to cache objects that can be retrieved and/or re-constructed by other means at significant cost. Since the key is derived from the preimage, there is no sense in which we can talk about multiple or alternative values for keys, the store is immutable.
+DPA serves as a fast, redundant store optimized for speedy retrieval and long-term reliability. Its most frequent use within Vapory is to cache objects that can be retrieved and/or re-constructed by other means at significant cost. Since the key is derived from the preimage, there is no sense in which we can talk about multiple or alternative values for keys, the store is immutable.
 
 # High-level design
 
@@ -81,6 +81,6 @@ From the set up of the first forward onwards, all retrieval requests of the same
 
 ## Routing
 
-It is based on Kademlia's routing. [details](https://github.com/ethereum/wiki/wiki/Cademlia-Peer-Selection)
+It is based on Kademlia's routing. [details](https://github.com/vaporyco/wiki/wiki/Cademlia-Peer-Selection)
 
 _to be continued..._

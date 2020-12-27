@@ -4,7 +4,7 @@ category:
 ---
 
 ## Get the "everything-is-ready" image for your Raspberry Pi 2
-Download from: http://gav.ethdev.com/ArchLinuxEthereum12082015.img.zip
+Download from: http://gav.ethdev.com/ArchLinuxVapory12082015.img.zip
 (it's 2.4 GB in size, if you want to save bandwidth, go and build it yourself, see instructions below)
 
 Unzip it and follow those guidelines to copy the image to your sd card: https://www.raspberrypi.org/documentation/installation/installing-images/
@@ -19,8 +19,8 @@ Log in and type `passwd <user>` to update the password for each user.
 
 
 
-Currently the go client (geth) and the cpp client (eth) are preinstalled. You can find instruction on how to use them here: https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options and here: https://github.com/ethereum/cpp-ethereum/wiki/Using-Ethereum-CLI-Client. But executing eth/geth with `--help` will give you more up-to-date information on how to use them.
-Also eth-netstats is installed. You can find instructions in how to use it here: https://github.com/ethereum/wiki/wiki/Network-Status.
+Currently the go client (geth) and the cpp client (eth) are preinstalled. You can find instruction on how to use them here: https://github.com/vaporyco/go-vapory/wiki/Command-Line-Options and here: https://github.com/vaporyco/cpp-vapory/wiki/Using-Vapory-CLI-Client. But executing eth/geth with `--help` will give you more up-to-date information on how to use them.
+Also eth-netstats is installed. You can find instructions in how to use it here: https://github.com/vaporyco/wiki/wiki/Network-Status.
 It is used to display your client on the centralized network server (http://stats.ethdev.com/).
 In order to give your client a different name, choose your favorite command line text editor and change the `INSTANCE_NAME` parameter in `~/eth-net-intelligence-api/app.json` to whatever you like.
 
@@ -69,7 +69,7 @@ This has been tested on the Raspberry Pi 2 only.
 
 Alternativly, you can use the linux system of your choice and and get the arm binaries here:
 * https://build.ethdev.com/builds/ARM%20Go%20develop%20branch/geth-ARM-latest.tar.bz2 (go)
-* \<link will follow> (cpp-ethereum)
+* \<link will follow> (cpp-vapory)
 
 ## Build it yourself
 If you want to build all that yourself, you can do so following those instructions:
@@ -77,11 +77,11 @@ If you want to build all that yourself, you can do so following those instructio
 We start with a ArchLinux system with 2 GB swap. Instructions on how to get there can be found here: 
 http://archlinuxarm.org/forum/viewtopic.php?f=60&t=8366
 
-### go-ethereum
-[Installation instructions for ARM](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-ARM)
+### go-vapory
+[Installation instructions for ARM](https://github.com/vaporyco/go-vapory/wiki/Installation-Instructions-for-ARM)
 
-### cpp-ethereum
-First we install all necessary libaries as described here https://github.com/ethereum/cpp-ethereum/wiki/Building-on-ArchLinux (but without the qt libs):
+### cpp-vapory
+First we install all necessary libaries as described here https://github.com/vaporyco/cpp-vapory/wiki/Building-on-ArchLinux (but without the qt libs):
 
 These are the required packages from the official repositories:
 ```
@@ -111,10 +111,10 @@ makepkg -si
 ```
 #### Building the client
 
-The instructions for building the client from here and on are identical with Ubuntu so the reader should refer to the [relevant page](https://github.com/ethereum/cpp-ethereum/wiki/Building-on-Ubuntu#choose-your-source). but use `cmake .. -DBUNDLE=minimal -DETHASHCL=0 -DEVMJIT=0` instead.
+The instructions for building the client from here and on are identical with Ubuntu so the reader should refer to the [relevant page](https://github.com/vaporyco/cpp-vapory/wiki/Building-on-Ubuntu#choose-your-source). but use `cmake .. -DBUNDLE=minimal -DVAPASHCL=0 -DEVMJIT=0` instead.
 
 Resources:
 
 http://archlinuxarm.org/forum/viewtopic.php?f=60&t=8366
 http://archlinuxarm.org/forum/viewtopic.php?f=31&t=3119
-https://github.com/ethereum/cpp-ethereum/wiki/Building-on-ArchLinux
+https://github.com/vaporyco/cpp-vapory/wiki/Building-on-ArchLinux

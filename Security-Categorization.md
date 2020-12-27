@@ -3,9 +3,9 @@ name: Security Categorization
 category: 
 ---
 
-See also: [https://github.com/ethereum/wiki/wiki/Design-Rationale](https://github.com/ethereum/wiki/wiki/Design-Rationale), for descriptions of potentially counterintuitive design decisions in Ethereum.
+See also: [https://github.com/vaporyco/wiki/wiki/Design-Rationale](https://github.com/vaporyco/wiki/wiki/Design-Rationale), for descriptions of potentially counterintuitive design decisions in Vapory.
 
-The purpose of this document is to attempt to create a taxonomy of key security properties that we are targeting for the Ethereum protocol, implementation and materials to have at launch time, as well as provide supplementary information where needed for each one.
+The purpose of this document is to attempt to create a taxonomy of key security properties that we are targeting for the Vapory protocol, implementation and materials to have at launch time, as well as provide supplementary information where needed for each one.
 
 ### Yellow Paper
 
@@ -16,7 +16,7 @@ The purpose of this document is to attempt to create a taxonomy of key security 
 
 ### Proof of Work
 
-The working spec description of Dagger Hashimoto is available at  [https://github.com/ethereum/wiki/wiki/Ethash](https://github.com/ethereum/wiki/wiki/Ethash)
+The working spec description of Dagger Hashimoto is available at  [https://github.com/vaporyco/wiki/wiki/Vapash](https://github.com/vaporyco/wiki/wiki/Vapash)
 
 The algorithm is intended to have the following key properties:
 
@@ -34,22 +34,22 @@ And should not have any of the following flaws:
 
 ### Block algorithm
 
-A simulator of difficulty adjustment is available at https://github.com/ethereum/economic-modeling/blob/master/diffadjust/blkdiff.py .
+A simulator of difficulty adjustment is available at https://github.com/vaporyco/economic-modeling/blob/master/diffadjust/blkdiff.py .
 
-The modified GHOST algorithm is defined [here](https://github.com/ethereum/wiki/wiki/White-Paper#modified-ghost-implementation).
+The modified GHOST algorithm is defined [here](https://github.com/vaporyco/wiki/wiki/White-Paper#modified-ghost-implementation).
 
 The following properties are desired:
 
 * The difficulty adjustment should update quickly to increasing or decreasing hashpower and should not be maliciously gameable in any sense.
 * The 12 second block time + GHOST should not have perverse incentives (ie. it should be optimal to mine on the head)
 * The 12 second block time should not induce an excessively high orphan rate and higher confirmation times than expected.
-* Ethereum should remain reasonably light-client friendly, especially for low-power IoT (patch solution if necessary: block skiplists, eg. every block with number % n^k == 0 must refer to the block n^k blocks ago, for say n = 4 and k = 0...3; this basically entails turning prevhash into an array)
+* Vapory should remain reasonably light-client friendly, especially for low-power IoT (patch solution if necessary: block skiplists, eg. every block with number % n^k == 0 must refer to the block n^k blocks ago, for say n = 4 and k = 0...3; this basically entails turning prevhash into an array)
 * Blockchain bloat: blocksize too big to incentivize new full nodes. Will it be dynamically adjusted? If so,  also rogue miners attack to bloat the blockchain
 * It should be expensive to generate incentives not to mine on the best chain using baits inside of smart contracts
 
 ### Gas economics
 
-* The floating gas limit should achieve the compatibility objectives described in https://github.com/ethereum/wiki/wiki/White-Paper#fees
+* The floating gas limit should achieve the compatibility objectives described in https://github.com/vaporyco/wiki/wiki/White-Paper#fees
 * There should not exist a way for a transaction to get itself executed and spend large amounts of computational resources on many nodes without paying for gas
     * The following is an example vulnerability: a miner can create a transaction A that spends a very large amount of gas (eg. ~gaslimit * 0.99) running useless computation. That miner then creates a transaction B with the same nonce that has no effect, and tries to mine a block containing B. If a miner produces a block containing B, it broadcasts A, forcing all other nodes on the network to waste time processing A, even though A actually getting accepted is nearly impossible since B is already published in a block.
 * There should not be any kind of of perverse incentive in the way gas costs work on the high level (eg. how gas is passed from parent to child message, how gas is refunded, exception reversions, etc)
@@ -64,7 +64,7 @@ The following properties are desired:
 
 ### VM
 
-* The VM implementation and the formal specifications (so called Yellow Paper) should be equivalent. The VM implementation can be found at https://github.com/ethereum/go-ethereum/tree/master/vm
+* The VM implementation and the formal specifications (so called Yellow Paper) should be equivalent. The VM implementation can be found at https://github.com/vaporyco/go-vapory/tree/master/vm
 * The VM should be resistant to the following attack scenarios:
   * Transactions/messages whose execution will somehow escape the VM and either reveal or modify memory or hard drive contents of the client's machine
   * Transactions/messages whose execution will cause a system crash
@@ -73,7 +73,7 @@ The following properties are desired:
 
 ### Wire protocol 
 
-The wire protocol is described here: https://github.com/ethereum/wiki/wiki/%C3%90%CE%9EVp2p-Wire-Protocol
+The wire protocol is described here: https://github.com/vaporyco/wiki/wiki/%C3%90%CE%9EVp2p-Wire-Protocol
 
 The wire protocol should be secure against the following issues:
 
@@ -96,7 +96,7 @@ The wire protocol should be secure against the following issues:
   * Check for hidden limits in leveldb and other libraries that might trigger inconsistent failures outside the VM, similar to http://bitcoinmagazine.com/3668/bitcoin-network-shaken-by-blockchain-fork/
 * Crytopgraphic libraries
   * secp256k1 with a Go bridge (https://github.com/obscuren/secp256k1-go)
-  * A fork of the official golang sha3 package (https://github.com/obscuren/sha3) (Reason for using a sha3 fork is because the official sha3 has switched to FIPS-202 which Ethereum can't use because genesis addresses have been generated using an earlier version of sha3)
+  * A fork of the official golang sha3 package (https://github.com/obscuren/sha3) (Reason for using a sha3 fork is because the official sha3 has switched to FIPS-202 which Vapory can't use because genesis addresses have been generated using an earlier version of sha3)
   * Official ripemd package (code.google.com/p/go.crypto/ripemd160)
 
 ### Non-Audit security-related product wishlist:

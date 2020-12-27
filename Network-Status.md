@@ -5,7 +5,7 @@ category:
 
 # Network Status Monitoring
 
-The [Ethereum (centralised) network status monitor](https://stats.ethdev.com) (known sometimes as "eth-netstats") is a web-based application to monitor the health of the testnet/mainnet through a group of nodes.
+The [Vapory (centralised) network status monitor](https://stats.ethdev.com) (known sometimes as "eth-netstats") is a web-based application to monitor the health of the testnet/mainnet through a group of nodes.
 
 ## Listing
 
@@ -22,7 +22,7 @@ sudo npm install -g pm2
 
 Then edit the `app.json` file in it to configure for your node:
 
-- alter the value to the right of `LISTENING_PORT` to the ethereum listening port (default: 30303)
+- alter the value to the right of `LISTENING_PORT` to the vapory listening port (default: 30303)
 - alter the value to the right of `INSTANCE_NAME` to whatever you wish to name your node;
 - alter the value to the right of `CONTACT_DETAILS` if you wish to share your contact details
 - alter the value to the right of `RPC_PORT` to the rpc port for your node (by default 8545 for both cpp and go);
@@ -52,7 +52,7 @@ In order to update you have to do the following:
 ***   
 
 ## Auto-installation on a fresh Ubuntu install
-Fetch and run the build shell. This will install everything you need: latest ethereum - CLI from develop branch (you can choose between eth or geth), node.js, npm & pm2.
+Fetch and run the build shell. This will install everything you need: latest vapory - CLI from develop branch (you can choose between eth or geth), node.js, npm & pm2.
 
 ```bash
 bash <(curl https://raw.githubusercontent.com/cubedro/eth-net-intelligence-api/master/bin/build.sh)
@@ -84,7 +84,7 @@ cd ~/bin
 pm2 start processes.json
 ```
 
-ethereum (eth or geth) must be running with rpc enabled.
+vapory (eth or geth) must be running with rpc enabled.
 
 ```
 geth --rpc
@@ -98,4 +98,4 @@ To update the API client use the following command:
 ~/bin/www/bin/update.sh
 ```
 
-It will stop the current netstats client processes, automatically detect your ethereum implementation and version, update it to the latest develop build, update netstats client and reload the processes.
+It will stop the current netstats client processes, automatically detect your vapory implementation and version, update it to the latest develop build, update netstats client and reload the processes.

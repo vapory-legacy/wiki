@@ -1,8 +1,8 @@
-Morden is the first Ethereum alternative testnet. It is expected to continue throughout the Frontier and Homestead era.
+Morden is the first Vapory alternative testnet. It is expected to continue throughout the Frontier and Homestead era.
 
 ### Usage
 
-#### TurboEthereum (C++)
+#### TurboVapory (C++)
 
 This is supported natively on 0.9.93 and above. Pass the `--morden` argument in when starting any of the clients. e.g.:
 
@@ -16,12 +16,12 @@ Or, for AlethZero
 > alethzero --morden
 ```
 
-#### PyEthApp (Python client)
+#### PyVapApp (Python client)
 
-PyEthApp supports the morden network from v1.0.5 onwards:
+PyVapApp supports the morden network from v1.0.5 onwards:
 
 ```
-> pyethapp --profile morden run
+> pyvapapp --profile morden run
 ```
 
 ### Details

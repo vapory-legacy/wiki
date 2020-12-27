@@ -1,44 +1,44 @@
-https://gitter.im/ethereum
+https://gitter.im/vapory
 
 # Node Software ("Clients")
 
 ## Go
 
-https://gitter.im/ethereum/go-ethereum
+https://gitter.im/vapory/go-vapory
 
 ## CPP 
 
-https://gitter.im/ethereum/cpp-ethereum
+https://gitter.im/vapory/cpp-vapory
 
 ## Python 
 
-https://gitter.im/ethereum/pyethapp - the client
+https://gitter.im/vapory/pyvapapp - the client
 
-https://gitter.im/ethereum/pyethereum - the core library (evm, blocks, txs, ...)
+https://gitter.im/vapory/pyvapory - the core library (vvm, blocks, txs, ...)
 
-https://gitter.im/ethereum/pydevp2p - p2p network  
+https://gitter.im/vapory/pydevp2p - p2p network  
 
 # DApp Development
 
-https://gitter.im/ethereum/web3.js
+https://gitter.im/vapory/web3.js
 
-https://gitter.im/ethereum/mist
+https://gitter.im/vapory/mist
 
-https://gitter.im/ethereum/solidity
+https://gitter.im/vapory/solidity
 
-https://gitter.im/ethereum/serpent
+https://gitter.im/vapory/serpent
 
 # Other
 
-https://gitter.im/ethereum/porting
+https://gitter.im/vapory/porting
 
-https://gitter.im/ethereum/research
+https://gitter.im/vapory/research
 
 # Protocol
 
-https://gitter.im/ethereum/devp2p
+https://gitter.im/vapory/devp2p
 
-https://gitter.im/ethereum/light-client
+https://gitter.im/vapory/light-client
 
 
 

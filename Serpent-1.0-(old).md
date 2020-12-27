@@ -3,9 +3,9 @@ name: Serpent 1.0
 category: 
 ---
 
-Serpent is one of the high-level programming languages used to write Ethereum contracts. The language, as suggested by its name, is designed to be very similar to Python; later versions may even eventually come to target the entire [RPython spec](http://pypy.readthedocs.org/en/latest/coding-guide.html#rpython-definition). The language is designed to be maximally clean and simple, combining many of the efficiency benefits of a low-level language with ease-of-use in programming style. The latest version of the Serpent compiler, available [on github](http://github.com/ethereum/serpent), is written in C++, allowing it to be easily included in any client, and works by compiling the code first to LLL then to EVM; thus, if you like LLL, a possible intermediate option is to write Serpent, compile it to LLL, and then hand-tweak the LLL at the end.
+Serpent is one of the high-level programming languages used to write Vapory contracts. The language, as suggested by its name, is designed to be very similar to Python; later versions may even eventually come to target the entire [RPython spec](http://pypy.readthedocs.org/en/latest/coding-guide.html#rpython-definition). The language is designed to be maximally clean and simple, combining many of the efficiency benefits of a low-level language with ease-of-use in programming style. The latest version of the Serpent compiler, available [on github](http://github.com/vaporyco/serpent), is written in C++, allowing it to be easily included in any client, and works by compiling the code first to LLL then to EVM; thus, if you like LLL, a possible intermediate option is to write Serpent, compile it to LLL, and then hand-tweak the LLL at the end.
 
-This tutorial assumes basic knowledge of how Ethereum works, including the concept of blocks, transactions, contracts and messages and the fact that contracts take a byte array as input and provide a byte array as output. If you do not, then go [here](https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial) for a basic tutorial.
+This tutorial assumes basic knowledge of how Vapory works, including the concept of blocks, transactions, contracts and messages and the fact that contracts take a byte array as input and provide a byte array as output. If you do not, then go [here](https://github.com/vaporyco/wiki/wiki/Vapory-Development-Tutorial) for a basic tutorial.
 
 ### Differences Between Serpent and Python
 
@@ -22,13 +22,13 @@ The important differences between Serpent and Python are:
 
 In order to install the Serpent python library and executable do:
 
-    pip install ethereum-serpent
+    pip install vapory-serpent
 
-[Install the cpp-ethereum cli tools](https://github.com/ethereum/cpp-ethereum/wiki) to run the sc commands in the tutorial
+[Install the cpp-vapory cli tools](https://github.com/vaporyco/cpp-vapory/wiki) to run the sc commands in the tutorial
 
 If you want a library you can directly call from C++, instead do:
 
-    git clone http://github.com/ethereum/serpent
+    git clone http://github.com/vaporyco/serpent
     cd serpent
     make
     sudo make install
@@ -41,7 +41,7 @@ Now, let's write our first contract. Paste the following into a file called "mul
 
 This contract is a simple one line of code. The first thing to point out is that Serpent sees message data, memory and output in 32-byte chunks; `msg.data[0]` returns bytes 0-31 of the input, `msg.data[5]` returns bytes 160-191, etc, and `return(202020)` returns the value 202020 encoded in binary form padded to 32 bytes. From now on, these mechanics will be assumed; "the zeroth data field" will be synonymous with "bytes 0-31 of the input" and "returns three values a,b,c" will be synonymous with "returns 96 bytes consisting of the values a, b and c, each padded to 32 bytes".
 
-Note that the Serpent compiler (included in the [cpp-ethereum toolkit](https://github.com/ethereum/cpp-ethereum)) includes some tools to make this conversion convenient; `sc encode_datalist "1 2 3"` gives:
+Note that the Serpent compiler (included in the [cpp-vapory toolkit](https://github.com/vaporyco/cpp-vapory)) includes some tools to make this conversion convenient; `sc encode_datalist "1 2 3"` gives:
 
     000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000003
 
@@ -49,7 +49,7 @@ And `sc decode_datalist 000..003` gives:
 
     1 2 3
 
-Additionally, the Pyethereum testing environment that we will be using simply assumes that data input and output are in this format.
+Additionally, the Pyvapory testing environment that we will be using simply assumes that data input and output are in this format.
 
 Now, let's try actually compiling the code. Type:
 
@@ -76,9 +76,9 @@ Alternatively, you can compile to LLL (the compiler compiles through LLL anyway,
 
 This shows you the machinery that is going on inside. As with most contracts, the outermost layer of code exists only to copy the data of the inner code during initialization and return it, since the code returned during initialization is the code that will be executed every time the contract is called; in the EVM you can see this with the `CODECOPY` opcode, and in LLL this corresponds to the `lll` meta-operation. In the innermost layer, we take bytes 0-31 from the input, multiply that value by two, and save it in a temp variable called `_temp4_1`. We then supply the memory address of that variable, and the length 32, to the `RETURN` opcode. Note that, when dealing with message and memory data, LLL deals not with 32-byte chunks but with bytes directly, so the conversion needs to introduce these more low-level mechanics. `msg.data[1]`, for examples, is translated into `(calldataload 32)`, and `msg.data[3]` into `(calldataload 96)`.
 
-Now, what if you want to actually run the contract? That is where [pyethereum](https://github.com/ethereum/pyethereum) comes in. Open up a Python console in the same directory, and run:
+Now, what if you want to actually run the contract? That is where [pyvapory](https://github.com/vaporyco/pyvapory) comes in. Open up a Python console in the same directory, and run:
 
-    > from pyethereum import tester as t
+    > from pyvapory import tester as t
     > s = t.state()
     > c = s.contract('mul2.se')
     > s.send(t.k0, c, 0, [42])
@@ -105,9 +105,9 @@ Having a multiply-by-two function on the blockchain is kind of boring. So let's 
 
 Here, we see a few parts in action. First, we have the `msg.data` pseudo-array, which can be used to access message input data items. Then, we have `key` and `value`, which are variables that we set. The third line is a comment; it does not get compiled and only serves to remind you what the code does. Then, we have a standard if/else clause, which checks if `contract.storage[key]` is zero (ie. unclaimed), and if it is then it sets `contract.storage[key] = value` and returns 1. Otherwise, it returns zero (which we expressed as a literal array just to exhibit this other style of returning; it's more cumbersome but lets you do return multiple values). `contract.storage` is also a pseudo-array, acting like an array but without any particular memory location.
 
-Now, paste the code into "namecoin.se", if you wish try compiling it to LLL, opcodes or EVM, and let's try it out in the pyethereum tester environment:
+Now, paste the code into "namecoin.se", if you wish try compiling it to LLL, opcodes or EVM, and let's try it out in the pyvapory tester environment:
 
-    > from pyethereum import tester as t
+    > from pyvapory import tester as t
     > s = t.state()
     > c = s.contract('namecoin.se')
     > s.send(t.k0, c, 0, ["george", 45])
@@ -132,7 +132,7 @@ returnten.se:
 
 And open Python:
 
-    > from pyethereum import tester as t
+    > from pyvapory import tester as t
     > s = t.state()
     > c = s.contract('returnten.se')
     > s.send(t.k0, c, 0, [])
@@ -142,7 +142,7 @@ Another, similar, operation is `(inset 'filename')`, which simply puts code into
 
 ### Miscellaneous
 
-Additional Serpent coding examples can be found here: https://github.com/ethereum/serpent/tree/master/examples
+Additional Serpent coding examples can be found here: https://github.com/vaporyco/serpent/tree/master/examples
 
 The three other useful features in the tester environment are:
 
@@ -202,11 +202,11 @@ An expression is defined as anything that fits on one line. An expression is rec
   * `return(array, size)` - exits message execution, returning the given array with the given number of 32-byte chunks
   * `stop` - exits message execution, reporting nothing
   * `suicide(addr)` - destroys the contract, sending all ether to the given address
-  * `debug(num)` - does nothing (in the pyethereum implementation with the `DUP POP POP` sequence of opcodes). However, implementations may wish to show the number in some kind of debug output.
+  * `debug(num)` - does nothing (in the pyvapory implementation with the `DUP POP POP` sequence of opcodes). However, implementations may wish to show the number in some kind of debug output.
 
 ### Code blocks
 
-A code block constitutes a complete program in Ethereum. A code block is defined as follows: 
+A code block constitutes a complete program in Vapory. A code block is defined as follows: 
 
 (1) An expression is a code block.  
 

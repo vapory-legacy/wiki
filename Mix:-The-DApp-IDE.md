@@ -7,17 +7,17 @@ category:
 
 This guide provides a very simple and quick introduction to the Mix IDE workflow by walking you through the creation of a simple ÐApp. Once you are done with this tutorial, you will have a general knowledge of how to create and run applications in the IDE.
 
-Note that the software is in still in proof-of-concept state. Things are changing rapidly and this tutorial might not be up to date. If that is the case [please open an issue](https://github.com/ethereum/cpp-ethereum/issues) or [edit the wiki](https://github.com/ethereum/wiki/wiki/Mix%3A-The-DApp-IDE/_edit). 
+Note that the software is in still in proof-of-concept state. Things are changing rapidly and this tutorial might not be up to date. If that is the case [please open an issue](https://github.com/vaporyco/cpp-vapory/issues) or [edit the wiki](https://github.com/vaporyco/wiki/wiki/Mix%3A-The-DApp-IDE/_edit). 
 
 ## Getting started.
 
-This tutorial assumes you have [C++ Ethereum installed](https://github.com/ethereum/cpp-ethereum/wiki).
+This tutorial assumes you have [C++ Vapory installed](https://github.com/vaporyco/cpp-vapory/wiki).
 
 ## Creating a new project
 
 Let's create a simple ÐApp that will allow user to store and query personal movie ratings.
 
-In the IDE, choose `File > New Project`. Enter the project name "MovieRatings" and a path for the project file. To the left there is a project items list with two items added by default: Contract and index.html. Contract contains [Solidity](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) contract code, and index.html is for the front-end. You can add new contract files to the project using file menu. All files will be copied to the project directory.
+In the IDE, choose `File > New Project`. Enter the project name "MovieRatings" and a path for the project file. To the left there is a project items list with two items added by default: Contract and index.html. Contract contains [Solidity](https://github.com/vaporyco/wiki/wiki/Solidity-Tutorial) contract code, and index.html is for the front-end. You can add new contract files to the project using file menu. All files will be copied to the project directory.
 
 Select Contract and enter the text for the rating contract:
 
@@ -30,7 +30,7 @@ Select Contract and enter the text for the rating contract:
 	}
 ```
 
-Check [Solidity tutorial](https://github.com/ethereum/wiki/wiki/Solidity-Tutorial) for solidity reference.
+Check [Solidity tutorial](https://github.com/vaporyco/wiki/wiki/Solidity-Tutorial) for solidity reference.
 
 Now select `index.html` and enter the following html code:
 ```html
@@ -68,14 +68,14 @@ Now select `index.html` and enter the following html code:
 	</html>
 ```
 Note that Mix exposes the following objects into the global window context:
-* [`web3`](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3) - Ethereum JavaScript API 
+* [`web3`](https://github.com/vaporyco/wiki/wiki/JavaScript-API#web3) - Vapory JavaScript API 
 
 * `contracts` - A collection of contract objects. A key to the collection is the contract name. A value is an object with the following properties:
  * `contract` - Contract object instance (created as in `web3.eth.contract`)
  * `address` - Contract address from the last deployed state (see below)
  * `interface` - Contract ABI
 
-Check the [JavaScript API Reference](https://github.com/ethereum/wiki/wiki/JavaScript-API) for further information.
+Check the [JavaScript API Reference](https://github.com/vaporyco/wiki/wiki/JavaScript-API) for further information.
 
 Select `File > Save` to save project files. You should see the web preview in the web preview pane.
 
@@ -105,7 +105,7 @@ Double-click a `setRating` transaction in the transaction log to debug it. The V
 * Memory - Machine memory allocated up to this execution point
 * Call data - Transaction or call parameters
 
-See the [Ethereum Yellow Paper](http://gavwood.com/Paper.pdf) for VM instruction description.
+See the [Vapory Yellow Paper](http://gavwood.com/Paper.pdf) for VM instruction description.
 
 ## Deployment to network
 
@@ -121,7 +121,7 @@ This step will deploy contracts in the main blockchain.
 This step is used to package and upload frontend resources.
 
  - **Register**:
-To render the Dapp, the Ethereum browser (Mist or AlethZero) needs to access this package. This step will register the URL where the resources are stored.
+To render the Dapp, the Vapory browser (Mist or AlethZero) needs to access this package. This step will register the URL where the resources are stored.
 
 To Deploy your Dapp, Please follow these instructions:
 
@@ -132,7 +132,7 @@ This modal dialog displays three parts (see above):
 
  - *Select Scenario*
 
-"Ethereum node URL" is the location where a node is running, there must be a node running in order to initiate deployment.
+"Vapory node URL" is the location where a node is running, there must be a node running in order to initiate deployment.
 
 "Pick Scenario to deploy" is a mandatory step. Mix will execute transactions that are in the selected scenario (all transactions except transactions that are not related to contract creation or contract call). Mix will display all the transactions in the panel below with all associated input parameters.
 
@@ -172,9 +172,9 @@ This step has to be done outside of Mix. package.dapp file has to be hosted by a
 
 "Http URL" is the url where resources are hosted (pastebin.com or similar)
 
-"Ethereum URL" is the url that users will use in AlethZero or Mist to access your dapp.
+"Vapory URL" is the url that users will use in AlethZero or Mist to access your dapp.
 
-"Formatted Ethereum URL" is the url that users will use in AlethZero or Mist to access your dapp.
+"Formatted Vapory URL" is the url that users will use in AlethZero or Mist to access your dapp.
 
 "Gas Price" shows the default gas price of the network. You can also specify a different value.
 

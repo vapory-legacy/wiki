@@ -3,7 +3,7 @@ name: DEV P2P Wire Protocol
 category: 
 ---
 
-Peer-to-peer communications between nodes running Ethereum/Whisper/&c. clients are designed to be governed by a simple wire-protocol making use of existing ÐΞV technologies and standards such as [RLP](https://github.com/ethereum/wiki/wiki/RLP) wherever practical.
+Peer-to-peer communications between nodes running Vapory/Whisper/&c. clients are designed to be governed by a simple wire-protocol making use of existing ÐΞV technologies and standards such as [RLP](https://github.com/vaporyco/wiki/wiki/RLP) wherever practical.
 
 This document is intended to specify this protocol comprehensively.
 
@@ -26,7 +26,7 @@ Message IDs are assumed to be compact from ID 0x10 onwards (0x00-0x10 is reserve
 **Hello**
 [`0x00`: `P`, `p2pVersion`: `P`, `clientId`: `B`, [[`cap1`: `B_3`, `capVersion1`: `P`], [`cap2`: `B_3`, `capVersion2`: `P`], `...`], `listenPort`: `P`, `nodeId`: `B_64`] First packet sent over the connection, and sent once by both sides. No other messages may be sent until a Hello is received.
 * `p2pVersion` Specifies the implemented version of the P2P protocol. Now must be 1.
-* `clientId` Specifies the client software identity, as a human-readable string (e.g. "Ethereum(++)/1.0.0").
+* `clientId` Specifies the client software identity, as a human-readable string (e.g. "Vapory(++)/1.0.0").
 * `cap` Specifies a peer capability name as a length-3 ASCII string. Current supported capabilities are `eth`, `shh`.
 * `capVersion` Specifies a peer capability version as a positive integer. Current supported versions are 34 for `eth`, and 1 for `shh`.
 * `listenPort` specifies the port that the client is listening on (on the interface that the present connection traverses). If 0 it indicates the client is not listening.

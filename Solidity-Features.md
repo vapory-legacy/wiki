@@ -4,7 +4,7 @@ category:
 ---
 
 This is a list to explain and demonstrate new Solidity features as soon as they are completed.
-It is used as a kind of changelog and items introduced at some point might be changed at a later point. The official reference is the [Documentation](https://ethereum.github.io/solidity/) which should always reflect the current state of the language.
+It is used as a kind of changelog and items introduced at some point might be changed at a later point. The official reference is the [Documentation](https://vapory.github.io/solidity/) which should always reflect the current state of the language.
 
 ## Special Type Treatment for Integer Literals
 
@@ -491,7 +491,7 @@ contract Derived is Base(0) {
 ```
 
 ## Detect failed CALLs
-[PT](https://github.com/ethereum/cpp-ethereum/pull/1212) If a CALL fails, do not just silently continue. Currently, this issues a STOP but it will throw an exception once we have exceptions.
+[PT](https://github.com/vaporyco/cpp-vapory/pull/1212) If a CALL fails, do not just silently continue. Currently, this issues a STOP but it will throw an exception once we have exceptions.
 ```
 contract C {
   function willFail() returns (uint) {

@@ -3,7 +3,7 @@ name: Brain Wallet
 category: 
 ---
 
-Ethereum brain wallets are formed through applying the SHA3 to a seed to get a result `R`, then using `R` as an accumulator for 16384 repeat SHA3 operations. This process is continued until the result, when used as a private key, forms a valid Direct ICAP (34 digit) address, defined as the first byte of the address being 0.
+Vapory brain wallets are formed through applying the SHA3 to a seed to get a result `R`, then using `R` as an accumulator for 16384 repeat SHA3 operations. This process is continued until the result, when used as a private key, forms a valid Direct ICAP (34 digit) address, defined as the first byte of the address being 0.
 
 ```
 FUNCTION toBrain(STRING seed) RETURNS SECRET
@@ -18,7 +18,7 @@ FUNCTION toBrain(STRING seed) RETURNS SECRET
 END FUNCTION
 ```
 
-See [C++ implementation](https://github.com/ethereum/cpp-ethereum/blob/develop/libethcore/KeyManager.cpp#L215-L225) for an example.
+See [C++ implementation](https://github.com/vaporyco/cpp-vapory/blob/develop/libethcore/KeyManager.cpp#L215-L225) for an example.
 
 
 ### **Comments (Gustav):**
@@ -34,5 +34,5 @@ I would recommend we configure a KDF that is much harder (even up to 1-2s CPU ti
 This would make our brainwallets much harder to crack, and perhaps even allowing the seed to be shorter, improving usability.
 
 1. https://rya.nc/cracking_cryptocurrency_brainwallets.pdf
-2. https://github.com/ethereum/go-ethereum/blob/master/crypto/crypto_test.go#L65
-3. https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition
+2. https://github.com/vaporyco/go-vapory/blob/master/crypto/crypto_test.go#L65
+3. https://github.com/vaporyco/wiki/wiki/Web3-Secret-Storage-Definition

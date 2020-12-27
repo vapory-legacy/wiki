@@ -42,7 +42,7 @@ category:
  * Linker stage for compiler to insert other contract's addresses (used for libraries).
  * Compiler option to output runtime part of contracts.
  * Compile-time out of bounds check for access to fixed-size arrays by integer constants.
- * Version string includes libevmasm/libethereum's version (contains the optimizer).
+ * Version string includes libvvmasm/libvapory's version (contains the optimizer).
  * Bugfix: Accessors for constant public state variables.
  * Bugfix: Propagate exceptions in clone contracts.
  * Bugfix: Empty single-line comments are now treated properly.

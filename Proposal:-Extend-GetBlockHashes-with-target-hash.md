@@ -24,7 +24,7 @@ This forward synchronization strategy requires the capacity to locate a common a
 
     * Adhere to that requested by `GetBlockHashes`, opposed to the current "hard coded" young -> old ordering
 
-The benefit of this proposal is that beside providing the means to do forward syncing, it retains the capacity to implement the currently specified reverse fetch behavior by passing the genesis block's hash to `targetHash`. This way Ethereum implementations don't have to immediately devise a new downloader strategy to cope with the update, but can function as they are until ready to evolve.
+The benefit of this proposal is that beside providing the means to do forward syncing, it retains the capacity to implement the currently specified reverse fetch behavior by passing the genesis block's hash to `targetHash`. This way Vapory implementations don't have to immediately devise a new downloader strategy to cope with the update, but can function as they are until ready to evolve.
 
 # Supersedes
 

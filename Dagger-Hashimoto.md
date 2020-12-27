@@ -5,19 +5,19 @@ category:
 
 ## Introduction
 
-Dagger Hashimoto is a proposed spec for the mining algorithm for Ethereum 1.0. Dagger Hashimoto aims to simultaneously satisfy two goals:
+Dagger Hashimoto is a proposed spec for the mining algorithm for Vapory 1.0. Dagger Hashimoto aims to simultaneously satisfy two goals:
 
 1. **ASIC-resistance**: the benefit from creating specialized hardware for the algorithm should be as small as possible, ideally to the point that even in an economy where ASICs have been developed the speedup is sufficiently small that it is still marginally profitable for users on ordinary computers to mine with spare CPU power.
 2. **Light client verifiability**: a block should be relatively efficiently verifiable by a light client.
 
 With an additional modification, we also specify how to fulfill a third goal if desired, but at the cost of additional complexity:
 
-**Full chain storage**: mining should require storage of the complete blockchain state (due to the irregular structure of the Ethereum state trie, we anticipate that some pruning will be possible, particularly of some often-used contracts, but we want to minimize this).
+**Full chain storage**: mining should require storage of the complete blockchain state (due to the irregular structure of the Vapory state trie, we anticipate that some pruning will be possible, particularly of some often-used contracts, but we want to minimize this).
 
 Dagger Hashimoto builds on two key pieces of previous work:
 
 * [Hashimoto](http://vaurum.com/hashimoto.pdf), an algorithm by Thaddeus Dryja which intends to achieve ASIC resistance by being IO-bound, ie. making memory reads the limiting factor in the mining process. The theory is that RAM is in principle inherently a much more generic ingredient than computation, and billions of dollars of research already go into optimizing it for different use cases which often involve near-random access patterns (hence "random access memory"); hence, existing RAM is likely to be moderately close to optimal for evaluating the algorithm. Hashimoto uses the blockchain as a source of data, simultaneously satisfying (1) and (3) above.
-* [Dagger](http://vitalik.ca/ethereum/dagger.html), an algorithm by Vitalik Buterin which uses directed acyclic graphs to simultaneously achieve memory-hard computation but memory-easy validation. The core principle is that each individual nonce only requires a small portion of a large total data tree, and recomputing the subtree for each nonce is prohibitive for mining - hence the need to store the tree - but okay for a single nonce's worth of verification. Dagger was meant to be an alternative to existing memory-hard algorithms like [Scrypt](http://en.wikipedia.org/wiki/Scrypt), which are memory-hard but are also very hard to verify when their memory-hardness is increased to genuinely secure levels. However, Dagger was proven to be vulnerable to shared memory hardware acceleration [by Sergio Lerner](https://bitslog.wordpress.com/2014/01/17/ethereum-dagger-pow-is-flawed/) and was then dropped in favor of other avenues of research.
+* [Dagger](http://vitalik.ca/vapory/dagger.html), an algorithm by Vitalik Buterin which uses directed acyclic graphs to simultaneously achieve memory-hard computation but memory-easy validation. The core principle is that each individual nonce only requires a small portion of a large total data tree, and recomputing the subtree for each nonce is prohibitive for mining - hence the need to store the tree - but okay for a single nonce's worth of verification. Dagger was meant to be an alternative to existing memory-hard algorithms like [Scrypt](http://en.wikipedia.org/wiki/Scrypt), which are memory-hard but are also very hard to verify when their memory-hardness is increased to genuinely secure levels. However, Dagger was proven to be vulnerable to shared memory hardware acceleration [by Sergio Lerner](https://bitslog.wordpress.com/2014/01/17/vapory-dagger-pow-is-flawed/) and was then dropped in favor of other avenues of research.
 
 Approaches that were tried between Dagger and Dagger Hashimoto but are currently not our primary focus include:
 
@@ -53,7 +53,7 @@ def decode_int(s):
 We next assume that `sha3` is a function that takes an integer and outputs an integer, and `dbl_sha3` is a double-sha3 function; if converting this reference code into an implementation use:
 
 ```python
-from pyethereum import utils
+from pyvapory import utils
 def sha3(x):
     if isinstance(x, (int, long)):
         x = encode_int(x)
@@ -146,8 +146,8 @@ The algorithm used to generate the actual set of DAGs used to compute the work f
 
 ```python
 def get_prevhash(n):
-    from pyethereum.blocks import GENESIS_PREVHASH 
-    from pyethreum import chain_manager
+    from pyvapory.blocks import GENESIS_PREVHASH 
+    from pyvapreum import chain_manager
     if num <= 0:
         return hash_to_int(GENESIS_PREVHASH)
     else:

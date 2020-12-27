@@ -24,7 +24,7 @@ This process takes:
 * Linear time in the number of computational steps (as every step of execution, assuming honesty, is computed a maximum of exactly twice, once by the local node and once by the remote node)
 * Anywhere from constant to linear time in the number of `INVHASH` executions, depending on what portion of all available key/value pairs every node has and how well they are clustered
 
-It can be viewed as a superset of a DHT and Bitcoin-style SPV protocols, and is adaptable to state get operations, transaction proofs, receipt lookups, search operations, trie next/prev operations, proofs of non-membership, and generally any kind of computation on blockchain data. If implemented correctly it can be used for both Ethereum, Bitcoin proposals such as tree chains, and even parts of a decentralized search engine.
+It can be viewed as a superset of a DHT and Bitcoin-style SPV protocols, and is adaptable to state get operations, transaction proofs, receipt lookups, search operations, trie next/prev operations, proofs of non-membership, and generally any kind of computation on blockchain data. If implemented correctly it can be used for both Vapory, Bitcoin proposals such as tree chains, and even parts of a decentralized search engine.
 
 In order to prevent abuse, the program execution instance will naturally need to have a gas limit. There are two ways of doing this:
 

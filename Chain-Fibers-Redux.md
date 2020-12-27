@@ -7,7 +7,7 @@ category:
 
 ## History
 
-I came up with the first seed of this idea while chatting to Janislav Malahov in Berlin in Spring 2014. Unfortunately, the original article I wrote was lost along with my laptop when it was stolen in Vienna. After chatting over the principles with Vitalik more recently, we made a number of alterations and formalisations, mainly to the validation and the sub-state cutting mechanisms. What follows is a fairly complete picture of one particular possible plan for block chain scalability in a later version of Ethereum.
+I came up with the first seed of this idea while chatting to Janislav Malahov in Berlin in Spring 2014. Unfortunately, the original article I wrote was lost along with my laptop when it was stolen in Vienna. After chatting over the principles with Vitalik more recently, we made a number of alterations and formalisations, mainly to the validation and the sub-state cutting mechanisms. What follows is a fairly complete picture of one particular possible plan for block chain scalability in a later version of Vapory.
 
 
 ## Overview
@@ -44,15 +44,15 @@ make transaction                 validate transaction,                         r
 
 ## Transactors
 
-Transactors are pretty much exactly the same as in Ethereum 1.0 - they are the users of the system.
+Transactors are pretty much exactly the same as in Vapory 1.0 - they are the users of the system.
 
 ### Transactors: make transaction
 
-Transactors make a transaction much like they do in the existing Ethereum system. One or two minor differences - addresses can be used as a distance metric; those sharing the same number of initial bits are considered "closer", which means a greater certainty into the future that they will continue to be contained in the same state subspace. Contracts are naturally created in the same state subspace as the creator.
+Transactors make a transaction much like they do in the existing Vapory system. One or two minor differences - addresses can be used as a distance metric; those sharing the same number of initial bits are considered "closer", which means a greater certainty into the future that they will continue to be contained in the same state subspace. Contracts are naturally created in the same state subspace as the creator.
 
 Transactions, like Collators, operate over a number of fibers; perhaps one perhaps all, probably somewhere in between. Submission to collators may be directed through fiber sub-network overlays.
 
-Submission and payment to the collators happens much as existing transaction submission to miners happens in Ethereum 1.0.
+Submission and payment to the collators happens much as existing transaction submission to miners happens in Vapory 1.0.
 
 
 ## Collators
@@ -61,11 +61,11 @@ Collators maintain presence on at least two peer sub-network overlays; the Valid
 
 ### Collators: validate transaction
 
-On receipt of a transaction, they go through the usual Ethereum 1.0 rites of checking payment is enough, initial balances &c. Once basic validation is done, they attempt to execute it, throwing it out if it touches any fiber that is not part of collator's fiber set.
+On receipt of a transaction, they go through the usual Vapory 1.0 rites of checking payment is enough, initial balances &c. Once basic validation is done, they attempt to execute it, throwing it out if it touches any fiber that is not part of collator's fiber set.
 
 ### Collators: produce Comprehensive Merkle Proof and Post State Root
 
-Collators provide each post-state-root (as is found in the transaction receipt of Ethereum 1.0) and append to the block Merkle proofs and associated hints (e.g. contract code) for all inputs (balance, nonce, state, code) from all subspaces that are required for the evaluation of each transaction from a previously known post-state-root.
+Collators provide each post-state-root (as is found in the transaction receipt of Vapory 1.0) and append to the block Merkle proofs and associated hints (e.g. contract code) for all inputs (balance, nonce, state, code) from all subspaces that are required for the evaluation of each transaction from a previously known post-state-root.
 
 This allows an auditor to, without anything other than the previous post-state-root for each fiber, determine the validity of the block.
 

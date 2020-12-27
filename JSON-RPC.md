@@ -11,8 +11,8 @@ category:
 
 ## JavaScript API
 
-To talk to an ethereum node from inside a JavaScript application use the [web3.js](https://github.com/ethereum/web3.js) library, which gives an convenient interface for the RPC methods.
-See the [JavaScript API](https://github.com/ethereum/wiki/wiki/JavaScript-API) for more.
+To talk to an vapory node from inside a JavaScript application use the [web3.js](https://github.com/vaporyco/web3.js) library, which gives an convenient interface for the RPC methods.
+See the [JavaScript API](https://github.com/vaporyco/wiki/wiki/JavaScript-API) for more.
 
 ## JSON-RPC Endpoint
 
@@ -42,7 +42,7 @@ If accessing the RPC from a browser, CORS will need to be enabled with the appro
 geth --rpc --rpccorsdomain "http://localhost:3000"
 ```
 
-The JSON RPC can also be started from the [geth console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) using the `admin.startRPC(addr, port)` command.
+The JSON RPC can also be started from the [geth console](https://github.com/vaporyco/go-vapory/wiki/JavaScript-Console) using the `admin.startRPC(addr, port)` command.
 
 
 ### C++
@@ -62,11 +62,11 @@ In python the JSONRPC server is currently started by default and listens on `127
 
 You can change the port and listen address by giving a config option. 
 
-`pyethapp -c jsonrpc.listen_port=4002 -c jsonrpc.listen_host=127.0.0.2 run`
+`pyvapapp -c jsonrpc.listen_port=4002 -c jsonrpc.listen_host=127.0.0.2 run`
 
 ## JSON-RPC support
 
-| | cpp-ethereum | go-ethereum | py-ethereum|
+| | cpp-vapory | go-vapory | py-vapory|
 |-------|:------------:|:-----------:|:-----------:|
 | JSON-RPC 1.0 | &#x2713; | | |
 | JSON-RPC 2.0 | &#x2713; | &#x2713; | &#x2713; |
@@ -91,7 +91,7 @@ When encoding **UNFORMATTED DATA** (byte arrays, account addresses, hashes, byte
 - WRONG: 0xf0f0f (must be even number of digits)
 - WRONG: 004200 (must be prefixed 0x)
 
-Currently [cpp-ethereum](https://github.com/ethereum/cpp-ethereum) and [go-ethereum](https://github.com/ethereum/go-ethereum) provides JSON-RPC communication only over http.
+Currently [cpp-vapory](https://github.com/vaporyco/cpp-vapory) and [go-vapory](https://github.com/vaporyco/go-vapory) provides JSON-RPC communication only over http.
 
 ## The default block parameter
 
@@ -103,7 +103,7 @@ The following methods have a extra default block parameter:
 - [eth_getStorageAt](#eth_getstorageat)
 - [eth_call](#eth_call)
 
-When requests are made that act on the state of ethereum, the last default block parameter determines the height of the block.
+When requests are made that act on the state of vapory, the last default block parameter determines the height of the block.
 
 The following options are possible for the defaultBlock parameter:
 
@@ -320,14 +320,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":
 
 #### eth_protocolVersion
 
-Returns the current ethereum protocol version.
+Returns the current vapory protocol version.
 
 ##### Parameters
 none
 
 ##### Returns
 
-`String` - The current ethereum protocol version
+`String` - The current vapory protocol version
 
 ##### Example
 ```js

@@ -93,7 +93,7 @@ The deployment process includes two steps:
 This step will deploy contracts in the main blockchain and package front end resources of the current project. After this operation the package (package.dapp) will be available inside the deployment directory.
 
  - **The Registration of front end resources**:
-To render the Dapp, the Ethereum browser (Mist or AlethZero) needs to access this package. This step will register the URL where the resources are stored.
+To render the Dapp, the Vapory browser (Mist or AlethZero) needs to access this package. This step will register the URL where the resources are stored.
 
 To Deploy your Dapp, Please follow these instructions:
 
@@ -103,9 +103,9 @@ This modal dialog displays two parts, We will focus on the first part (Deploymen
  **The Deployment of contracts**
  - 4 Buttons: `Help` to access to the WikiPage, `Open Package Folder` to open the deployment directory (this button is only enable is the package is built), `Copy Base64 conversion to ClipBoard` to copy the Base64 value of the built package (this button is only enable is the package is built), `Exit` to close this modal dialog.   
  - `Root Registrar address` is the address of the root registrar contract (used to link the Dapp with resources.
- - `Account used to deploy` allows users to select the Ethereum account to use to deploy.
+ - `Account used to deploy` allows users to select the Vapory account to use to deploy.
  - `Amount of gas to use..` is the amount of gas that the deployment process will use to deploy contracts.
- - `Ethereum Application URL` is the address that users should use in Mist (or AlethZero) to access to the Dapp. in italic, you can check the formatted Dapp URL (which will be used by the Ethereum browser)
+ - `Vapory Application URL` is the address that users should use in Mist (or AlethZero) to access to the Dapp. in italic, you can check the formatted Dapp URL (which will be used by the Vapory browser)
 (ex: eth/user1/app1).
  - `Web Application Resources URL` is the URL where the front resources (html/js/...) will be stored.
  - 1 button to start the deployment process (The checkbox `Deploy Contract(s)` is disabled and checked if this is the first time the contract is deployed. If not you can choose to repackage the resources without redeploying the contract by unchecking this option).
@@ -127,11 +127,11 @@ There are many places where to host front end resources, you just need to find a
  
 **Registration of front end resources**
  - `URL Hint contract address` is the address of the contract which is used to store the URL where the resources are.
- - `Web Application Resources URL` is the URL from where the Ethereum browser will retrieve resources.
+ - `Web Application Resources URL` is the URL from where the Vapory browser will retrieve resources.
 
-Click on `Register hosted Web Application` and Mix will register the front end resources on the Ethereum network.
+Click on `Register hosted Web Application` and Mix will register the front end resources on the Vapory network.
 
-Users can now use  Mist or AlethZero to access to the Dapp, using the Ethereum URL (ex: eth/user1/app1).
+Users can now use  Mist or AlethZero to access to the Dapp, using the Vapory URL (ex: eth/user1/app1).
 
 # Account Management
 

@@ -3,9 +3,9 @@ name: CLL
 category: 
 ---
 
-### ECLL: Ethereum C-Like Language
+### ECLL: Vapory C-Like Language
 
-The purpose of ECLL is to provide a language that will be simple and friendly for users to write contracts in, but at the same time easily and efficiently compile into Ethereum script code. ECLL abstracts away concepts like pointers, direct memory access and jumping in favor of a more traditional syntax of conditionals, loops, arrays and variables. Function support, including first-class-function support, will be left to a future more powerful, but less efficient, language that will be denoted EHLL ("Ethereum High Level Language")
+The purpose of ECLL is to provide a language that will be simple and friendly for users to write contracts in, but at the same time easily and efficiently compile into Vapory script code. ECLL abstracts away concepts like pointers, direct memory access and jumping in favor of a more traditional syntax of conditionals, loops, arrays and variables. Function support, including first-class-function support, will be left to a future more powerful, but less efficient, language that will be denoted EHLL ("Vapory High Level Language")
 
 The specification will be in three parts. The first part will define the language as an abstract syntax tree, formalized using LISP-style S-expression syntax, the second part will provide specifications for what each operation does, and the third will show how the AST is to be rendered in text.
 

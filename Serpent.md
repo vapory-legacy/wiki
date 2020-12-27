@@ -3,11 +3,11 @@ name: Serpent
 category: 
 ---
 
-See https://github.com/ethereum/wiki/wiki/Serpent-1.0-(old) for Serpent 1.0.
+See https://github.com/vaporyco/wiki/wiki/Serpent-1.0-(old) for Serpent 1.0.
 
-Serpent is one of the high-level programming languages used to write Ethereum contracts. The language, as suggested by its name, is designed to be very similar to Python; it is intended to be maximally clean and simple, combining many of the efficiency benefits of a low-level language with ease-of-use in programming style, and at the same time adding special domain-specific features for contract programming. The latest version of the Serpent compiler, available [on github](http://github.com/ethereum/serpent), is written in C++, allowing it to be easily included in any client.
+Serpent is one of the high-level programming languages used to write Vapory contracts. The language, as suggested by its name, is designed to be very similar to Python; it is intended to be maximally clean and simple, combining many of the efficiency benefits of a low-level language with ease-of-use in programming style, and at the same time adding special domain-specific features for contract programming. The latest version of the Serpent compiler, available [on github](http://github.com/vaporyco/serpent), is written in C++, allowing it to be easily included in any client.
 
-This tutorial assumes basic knowledge of how Ethereum works, including the concept of blocks, transactions, contracts and messages and the fact that contracts take a byte array as input and provide a byte array as output. If you do not, then go [here](https://github.com/ethereum/wiki/wiki/Ethereum-Development-Tutorial) for a basic tutorial.
+This tutorial assumes basic knowledge of how Vapory works, including the concept of blocks, transactions, contracts and messages and the fact that contracts take a byte array as input and provide a byte array as output. If you do not, then go [here](https://github.com/vaporyco/wiki/wiki/Vapory-Development-Tutorial) for a basic tutorial.
 
 ### Differences Between Serpent and Python
 
@@ -24,11 +24,11 @@ The important differences between Serpent and Python are:
 
 In order to install the Serpent python library and executable do:
 
-    $ sudo pip install ethereum-serpent
+    $ sudo pip install vapory-serpent
 
 If you want a library you can directly call from C++, instead do:
 
-    $ git clone http://github.com/ethereum/serpent
+    $ git clone http://github.com/vaporyco/serpent
     $ cd serpent
     $ make
     $ sudo make install
@@ -42,7 +42,7 @@ Now, let's write our first contract. Paste the following into a file called `mul
 
 This contract is a simple two lines of code, and defines a function. Functions can be called either by transactions or by other contracts, and are the way that Serpent contracts provide an "interface" to other contracts and to transactions; for example, a contract defining a currency might have functions `send(to, value)` and `check_balance(address)`. 
 
-Additionally, the Pyethereum testing environment that we will be using simply assumes that data input and output are in this format.
+Additionally, the Pyvapory testing environment that we will be using simply assumes that data input and output are in this format.
 
 Now, let's try actually compiling the code. Type:
 
@@ -95,9 +95,9 @@ Note that you can have multiple functions with the same name, if they take diffe
 
 The letter `i` is meant for integers, and for fixed-length (up to 32 byte) strings (which are treated the same as integers in Serpent and EVM). Use the letter `s` for variable-length string arguments, and `a` for arrays; more on these later.
 
-Now, what if you want to actually run the contract? That is where [pyethereum](https://github.com/ethereum/pyethereum) comes in. Open up a Python console in the same directory, and run:
+Now, what if you want to actually run the contract? That is where [pyvapory](https://github.com/vaporyco/pyvapory) comes in. Open up a Python console in the same directory, and run:
 
-    >>> from ethereum import tester as t
+    >>> from vapory import tester as t
     >>> s = t.state()
     >>> c = s.abi_contract('mul2.se')
     >>> c.double(42)
@@ -127,9 +127,9 @@ Having a multiply-by-two function on the blockchain is kind of boring. So let's 
 
 Here, we see a few parts in action. First, we have the `key` and `value` variables that the function takes as arguments. The second line is a comment; it does not get compiled and only serves to remind you what the code does. Then, we have a standard if/else clause, which checks if `self.storage[key]` is zero (ie. unclaimed), and if it is then it sets `self.storage[key] = value` and returns 1. Otherwise, it returns zero. `self.storage` is also a pseudo-array, acting like an array but without any particular memory location.
 
-Now, paste the code into `namecoin.se`, if you wish try compiling it to LLL, opcodes or EVM, and let's try it out in the pyethereum tester environment:
+Now, paste the code into `namecoin.se`, if you wish try compiling it to LLL, opcodes or EVM, and let's try it out in the pyvapory tester environment:
 
-    >>> from ethereum import tester as t
+    >>> from vapory import tester as t
     >>> s = t.state()
     >>> c = s.abi_contract('namecoin.se')
     >>> c.register(0x67656f726765, 45)
@@ -166,7 +166,7 @@ returnten.se:
 
 And open Python:
 
-    >>> from ethereum import tester as t
+    >>> from vapory import tester as t
     >>> s = t.state()
     >>> c = s.abi_contract('returnten.se')
     >>> c.returnten()
@@ -385,7 +385,7 @@ Or to take the max of an array:
 
     x = maxarray([1, 9, 5, 6, 2, 4]:6)
 
-For a highly contrived example of just how powerful macros can be, see https://github.com/ethereum/serpent/blob/poc7/examples/peano.se
+For a highly contrived example of just how powerful macros can be, see https://github.com/vaporyco/serpent/blob/poc7/examples/peano.se
 
 Note that macros are not functions; they are copied into code every time they are used. Hence, if you have a long macro, you may instead want to make the macro call an actual function. Additionally, note that the dollar signs on variables are important; if you omit a dollar sign in the pattern $a then the macro will only match a variable actually called a. You can also create dollar sign variables that are in the substitution pattern, but not the search pattern; this will generate a variable with a random prefix each instance of the macro. You can also create new variables without a dollar sign inside a substitution pattern, but then the same variable will be shared across all instances of the pattern and with uses of that variable outside the pattern.
 
@@ -426,11 +426,11 @@ An excellent compliment to macros is Serpent's ghetto type system, which can be 
     c = b * b
     return(unfloat(c))
 
-This returns 156, the integer portion of 12.5^2. A purely integer-based version of this code would have simply returned 144. An interesting use case would be rewriting the [elliptic curve signature pubkey recovery code](https://github.com/ethereum/serpent/blob/df0aa0e1285d7667d4a0cc81b1e11e0abb31fff3/examples/ecc/jacobian_add.se) using types in order to make the code neater by making all additions and multiplications implicitly modulo P, or using [long integer types](https://github.com/ethereum/serpent/blob/poc7/examples/long_integer_macros.se) to do RSA and other large-value-based cryptography in EVM code.
+This returns 156, the integer portion of 12.5^2. A purely integer-based version of this code would have simply returned 144. An interesting use case would be rewriting the [elliptic curve signature pubkey recovery code](https://github.com/vaporyco/serpent/blob/df0aa0e1285d7667d4a0cc81b1e11e0abb31fff3/examples/ecc/jacobian_add.se) using types in order to make the code neater by making all additions and multiplications implicitly modulo P, or using [long integer types](https://github.com/vaporyco/serpent/blob/poc7/examples/long_integer_macros.se) to do RSA and other large-value-based cryptography in EVM code.
 
 ### Miscellaneous
 
-Additional Serpent coding examples can be found here: https://github.com/ethereum/serpent/tree/master/examples
+Additional Serpent coding examples can be found here: https://github.com/vaporyco/serpent/tree/master/examples
 
 The three other useful features in the tester environment are:
 
@@ -477,7 +477,7 @@ There are also special commands for a few crypto operations; particularly:
 
 * Sometimes you may be intending to use unsigned operators. eg div() and lt() instead of '/' and '<'.
 
-* To upgrade Serpent, you may need to do `pip uninstall ethereum-serpent` and `python setup.py install`.  (Avoid `pip install ethereum-serpent` since it will get from PyPI which is probably old.)
+* To upgrade Serpent, you may need to do `pip uninstall vapory-serpent` and `python setup.py install`.  (Avoid `pip install vapory-serpent` since it will get from PyPI which is probably old.)
 
 * When calling abi_contract(), if you get this type of error `Exception: Error (file "main", line 1, char 5): Invalid object member (ie. a foo.bar not mapped to anything)` make sure you are specifying correct path to the file you are compiling.
 
@@ -491,4 +491,4 @@ macro CONSTANT: 99
 * Be careful that if your flow requires going through a number of contracts, that someone can't just directly short-circuit and call one of your latter contracts with data they've manipulated elsewhere. Example: If you have contract C which gives someone ether, but relies on computation from Contract A->B->C, that someone can't just call B or C to give themselves ether.
 
 ### Other
-http://mc2-umd.github.io/ethereumlab/docs/serpent_tutorial.pdf - some outdated but can generally be helpful
+http://mc2-umd.github.io/vaporylab/docs/serpent_tutorial.pdf - some outdated but can generally be helpful

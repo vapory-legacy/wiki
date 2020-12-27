@@ -5,11 +5,11 @@ category:
 
 # Web3 JavaScript Ðapp API
 
-To make your Ðapp work on Ethereum, you can use the `web3` object provided by the [web3.js library](https://github.com/ethereum/web3.js). Under the hood it communicates to a local node through [RPC calls](https://github.com/ethereum/wiki/wiki/JSON-RPC). web3.js works with any Ethereum node, which exposes an RPC layer.
+To make your Ðapp work on Vapory, you can use the `web3` object provided by the [web3.js library](https://github.com/vaporyco/web3.js). Under the hood it communicates to a local node through [RPC calls](https://github.com/vaporyco/wiki/wiki/JSON-RPC). web3.js works with any Vapory node, which exposes an RPC layer.
 
-`web3` contains the `eth` object - `web3.eth` (for specifically Ethereum blockchain interactions) and the `shh` object - `web3.shh` (for Whisper interaction). Over time we'll introduce other objects for each of the other web3 protocols. Working  [examples can be found here](https://github.com/ethereum/web3.js/tree/master/example).
+`web3` contains the `eth` object - `web3.eth` (for specifically Vapory blockchain interactions) and the `shh` object - `web3.shh` (for Whisper interaction). Over time we'll introduce other objects for each of the other web3 protocols. Working  [examples can be found here](https://github.com/vaporyco/web3.js/tree/master/example).
 
-If you want to look at some more sophisticated examples using web3.js check out these [useful Ðapp patterns](https://github.com/ethereum/wiki/wiki/Useful-Ðapp-Patterns).
+If you want to look at some more sophisticated examples using web3.js check out these [useful Ðapp patterns](https://github.com/vaporyco/wiki/wiki/Useful-Ðapp-Patterns).
 
 ## Using callbacks
 
@@ -75,7 +75,7 @@ balance.plus(21).toString(10); // toString(10) converts it to a number string, b
      * [api](#web3versionapi)
      * [node](#web3versionnode)
      * [network](#web3versionnetwork)
-     * [ethereum](#web3versionethereum)
+     * [vapory](#web3versionvapory)
      * [whisper](#web3versionwhisper)
   * [isConnected()](#web3isconnected)
   * [setProvider(provider)](#web3setprovider)
@@ -189,7 +189,7 @@ web3.version.getApi(callback(error, result){ ... })
 
 ##### Returns
 
-`String` - The ethereum js api version.
+`String` - The vapory js api version.
 
 ##### Example
 
@@ -240,21 +240,21 @@ console.log(version); // 54
 
 ***
 
-#### web3.version.ethereum
+#### web3.version.vapory
 
-    web3.version.ethereum
+    web3.version.vapory
     // or async
-    web3.version.getEthereum(callback(error, result){ ... })
+    web3.version.getVapory(callback(error, result){ ... })
 
 
 ##### Returns
 
-`String` - The ethereum protocol version.
+`String` - The vapory protocol version.
 
 ##### Example
 
 ```js
-var version = web3.version.ethereum;
+var version = web3.version.vapory;
 console.log(version); // 60
 ```
 
@@ -440,7 +440,7 @@ Converts a HEX string into a ASCII string.
 
 ```js
 var str = web3.toAscii("0x657468657265756d000000000000000000000000000000000000000000000000");
-console.log(str); // "ethereum"
+console.log(str); // "vapory"
 ```
 
 ***
@@ -463,10 +463,10 @@ Converts any ASCII string to a HEX string.
 ##### Example
 
 ```js
-var str = web3.fromAscii('ethereum');
+var str = web3.fromAscii('vapory');
 console.log(str); // "0x657468657265756d"
 
-var str2 = web3.fromAscii('ethereum', 32);
+var str2 = web3.fromAscii('vapory', 32);
 console.log(str2); // "0x657468657265756d000000000000000000000000000000000000000000000000"
 ```
 
@@ -523,7 +523,7 @@ console.log(value); // "0x15"
 
     web3.fromWei(number, unit)
 
-Converts a number of wei into the following ethereum units:
+Converts a number of wei into the following vapory units:
 
 - `kwei`/`ada`
 - `mwei`/`babbage`
@@ -559,7 +559,7 @@ console.log(value); // "0.021"
 
     web3.toWei(number, unit)
 
-Converts an ethereum unit into wei. Possible units are:
+Converts an vapory unit into wei. Possible units are:
 
 - `kwei`/`ada`
 - `mwei`/`babbage`
@@ -665,7 +665,7 @@ console.log(peerCount); // 4
 
 ### web3.eth
 
-Contains the ethereum blockchain related methods.
+Contains the vapory blockchain related methods.
 
 ##### Example
 
@@ -1383,7 +1383,7 @@ Sends a transaction to the network.
   - `value`: `Number|String|BigNumber` - (optional) The value transferred for the transaction in Wei, also the endowment if it's a contract-creation transaction.
   - `gas`: `Number|String|BigNumber` - (optional, default: To-Be-Determined) The amount of gas to use for the transaction (unused gas is refunded).
   - `gasPrice`: `Number|String|BigNumber` - (optional, default: To-Be-Determined) The price of gas for this transaction in wei, defaults to the mean network gas price.
-  - `data`: `String` - (optional) Either a [byte string](https://github.com/ethereum/wiki/wiki/Solidity,-Docs-and-ABI) containing the associated data of the message, or in the case of a contract-creation transaction, the initialisation code.
+  - `data`: `String` - (optional) Either a [byte string](https://github.com/vaporyco/wiki/wiki/Solidity,-Docs-and-ABI) containing the associated data of the message, or in the case of a contract-creation transaction, the initialisation code.
   - `nonce`: `Number`  - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 2. `Function` - (optional) If you pass a callback the HTTP request is made asynchronous. See [this note](#using-callbacks) for details.
 
@@ -1397,7 +1397,7 @@ If the transaction was a contract creation use [web3.eth.getTransactionReceipt()
 
 ```js
 
-// compiled solidity source code using https://chriseth.github.io/cpp-ethereum/
+// compiled solidity source code using https://chriseth.github.io/cpp-vapory/
 var code = "603d80600c6000396000f3007c01000000000000000000000000000000000000000000000000000000006000350463c6888fa18114602d57005b600760043502
 8060005260206000f3";
 
@@ -1542,7 +1542,7 @@ filter.stopWatching();
     web3.eth.contract(abiArray)
 
 Creates a contract object for a solidity contract, which can be used to initiate contracts on an address.
-You can read more about events [here](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI#example-javascript-usage).
+You can read more about events [here](https://github.com/vaporyco/wiki/wiki/Vapory-Contract-ABI#example-javascript-usage).
 
 ##### Parameters
 
@@ -1983,7 +1983,7 @@ Returns GlobalRegistrar object.
 
 ##### Usage
 
-see [namereg](https://github.com/ethereum/web3.js/blob/master/example/namereg.html) example
+see [namereg](https://github.com/vaporyco/web3.js/blob/master/example/namereg.html) example
 
 ***
 
@@ -2089,7 +2089,7 @@ console.log(value); // "0x4f554b443"
 
 ### web3.shh
 
-[Whisper  Overview](https://github.com/ethereum/wiki/wiki/Whisper-Overview)
+[Whisper  Overview](https://github.com/vaporyco/wiki/wiki/Whisper-Overview)
 
 ##### Example
 

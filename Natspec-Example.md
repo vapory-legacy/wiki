@@ -31,7 +31,7 @@ This is just a temporary solution to showcase the functionality of natspec. The 
 ## Open up the example contract
 
 ![Opening up example contract](images/natspec2.png)
-We will be using the JSON Api to try and perform the only transaction that our example contract has defined in its interface. Open up Alethzero's internal browser and type in the following path to get to our example `/path/to/cpp-ethereum/libjsqrc/ethereumjs/example/natspec_contract.html`.
+We will be using the JSON Api to try and perform the only transaction that our example contract has defined in its interface. Open up Alethzero's internal browser and type in the following path to get to our example `/path/to/cpp-vapory/libjsqrc/vaporyjs/example/natspec_contract.html`.
 
 You should see a page similar to below. Press the button to start the example.
 ![Starting natspec example](images/natspec3.png)

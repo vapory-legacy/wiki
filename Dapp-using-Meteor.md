@@ -10,7 +10,7 @@ This tutorial will show you how to setup a Meteor app to be used as a Ðapp and 
 3. [Connect your Ðapp](#connect-your-%C3%90app)
 4. [Run your Ðapp](#run-your-%C3%90app)
 5. [Add Ðapp styles](#add-%C3%90app-styles)
-6. [Using ethereum:elements](#using-ethereumelements)
+6. [Using vapory:elements](#using-vaporyelements)
 7. [Ðapp code structure](#%C3%90app-code-structure)
 8. [Bundle your Ðapp](#bundle-your-%C3%90app)
 
@@ -51,16 +51,16 @@ $ cd myDapp
 
 Next add the web3 package:
 ```bash
-$ meteor add ethereum:web3
+$ meteor add vapory:web3
 ```
 
 I recommend also to add the following packages:
 
-- [ethereum:dapp-styles](https://atmospherejs.com/ethereum/dapp-styles) - The LESS/CSS framework which gives your dapp a nice Mist-consistent look.
-- [ethereum:tools](https://atmospherejs.com/ethereum/tools) - This package gives you the `EthTools` object with a set of formatting an conversion functions and template helpers for ether.
-- [ethereum:elements](https://atmospherejs.com/ethereum/elements) - A set of interface elements specifically made for ethereum, see this [Demo](http://ethereum-elements.meteor.com) for more.
-- [ethereum:accounts](https://atmospherejs.com/ethereum/accounts) - Gives you the reactive `EthAccounts` collection with all current available ethereum accounts, where balances will be automatically updated.
-- [ethereum:blocks](https://atmospherejs.com/ethereum/blocks) - Gives you the reactive `EthBlocks` collection with the latest 50 blocks. To get the lastest block use `EthBlocks.latest` (It will also have the latest default gasPrice)
+- [vapory:dapp-styles](https://atmospherejs.com/vapory/dapp-styles) - The LESS/CSS framework which gives your dapp a nice Mist-consistent look.
+- [vapory:tools](https://atmospherejs.com/vapory/tools) - This package gives you the `EthTools` object with a set of formatting an conversion functions and template helpers for ether.
+- [vapory:elements](https://atmospherejs.com/vapory/elements) - A set of interface elements specifically made for vapory, see this [Demo](http://vapory-elements.meteor.com) for more.
+- [vapory:accounts](https://atmospherejs.com/vapory/accounts) - Gives you the reactive `EthAccounts` collection with all current available vapory accounts, where balances will be automatically updated.
+- [vapory:blocks](https://atmospherejs.com/vapory/blocks) - Gives you the reactive `EthBlocks` collection with the latest 50 blocks. To get the lastest block use `EthBlocks.latest` (It will also have the latest default gasPrice)
 - [frozeman:template-var](https://atmospherejs.com/frozeman/template-var) - Gives you the `TemplateVar` object, that allows you to set reactive variables, which are template instance specific. See the [readme](https://atmospherejs.com/frozeman/template-var) for more.
 - [frozeman:persistent-minimongo2](https://atmospherejs.com/frozeman/persistent-minimongo2) - Allows you to auto persist your minimongo collection in local storage
 
@@ -73,7 +73,7 @@ Meteor doesn't force you to have a specifc folder structure, though some folders
 
 Folders with specific treatment
 - `client` - files in a folder called `client` will only be loaded by the client part of your app and as we are building a Ðapp, thats where most of our files go.
-- `lib` - files in folders called `lib` will load before other files in the same folder. This is an ideal place your init files, libraries, or ethereum specifc files.
+- `lib` - files in folders called `lib` will load before other files in the same folder. This is an ideal place your init files, libraries, or vapory specifc files.
 - `public` - a folder called `public` contains assets meteor will make available on the root of your webserver (or later bundled Ðapp)
 - There are a few more specifc folders like `server`, `tests`, `packages`, etc. If you want to get to know them take a look at the [Meteor docs](http://docs.meteor.com/#/full/structuringyourapp)
 
@@ -123,7 +123,7 @@ If we go to `http://localhost:3000`, we should see a website appear and if we op
 
 ## Add Ðapp styles
 
-If you want your Ðapp to nicely fit later into Mist and have follow the official look use the [dapp-styles css css/less framework](https://atmospherejs.com/ethereum/dapp-styles).
+If you want your Ðapp to nicely fit later into Mist and have follow the official look use the [dapp-styles css css/less framework](https://atmospherejs.com/vapory/dapp-styles).
 
 *Note that they are under heavy development and the class names and elements may change.*
 
@@ -131,23 +131,23 @@ To add it simple add the following packages to your Ðapp:
 
 ```bash
 $ meteor add less
-$ meteor add ethereum:dapp-styles
+$ meteor add vapory:dapp-styles
 ```
 
 Now rename you `myDapp.css` to `myDapp.less` and add the following line inside:
 
 ```css
 // libs
-@import '{ethereum:dapp-styles}/dapp-styles.less';
+@import '{vapory:dapp-styles}/dapp-styles.less';
 ```
 
-Now you can use all dapp-styles classes and also overwrite all variables of the framework. You can find them [in the repo](https://github.com/ethereum/dapp-styles/blob/master/constants.import.less). Overwrite them by copying them to your `myDapp.less` file and set different values.
+Now you can use all dapp-styles classes and also overwrite all variables of the framework. You can find them [in the repo](https://github.com/vaporyco/dapp-styles/blob/master/constants.import.less). Overwrite them by copying them to your `myDapp.less` file and set different values.
 
-## Using ethereum packages
+## Using vapory packages
 
 To make your live as a Ðapp developer easier we provide some packages that help you build Ðapps faster.
 
-If you add the recommended packages above you should have the [ethereum:tools](https://atmospherejs.com/ethereum/tools), [accounts](https://atmospherejs.com/ethereum/accounts) and [ethereum:blocks](https://atmospherejs.com/ethereum/blocks) packages available.
+If you add the recommended packages above you should have the [vapory:tools](https://atmospherejs.com/vapory/tools), [accounts](https://atmospherejs.com/vapory/accounts) and [vapory:blocks](https://atmospherejs.com/vapory/blocks) packages available.
 
 These 3 packages give you the `EthTools`, `EthAccounts` and `Ethblocks` objects, which give you formatter functions,  a collection with the accounts from `web3.eth.accounts` (with auto updated balance) and a collection of the last 50 blocks.
 
@@ -175,7 +175,7 @@ Then initialize EthBlocks by adding `EthBlocks.init();` after `Session.setDefaul
 If you now check your Ðapp in the browser you should see the latest block number, which will increase once you mine.
 
 
-*For more examples please checkout the packages readmes and the [demo](http://ethereum-elements.meteor.com) ([source](https://github.com/frozeman/meteor-ethereum-elements-demo)) for more.*
+*For more examples please checkout the packages readmes and the [demo](http://vapory-elements.meteor.com) ([source](https://github.com/frozeman/meteor-vapory-elements-demo)) for more.*
 
 ## Ðapp code structure
 
@@ -184,11 +184,11 @@ If you now check your Ðapp in the browser you should see the latest block numbe
 
 TODO
 Short:
-- put ethereum related stuff into `client/lib/ethereum/somefile.js`
-- use `myCollection.observe({added: func, changed: func, removed: func})` to communicate to ethereum, keep ethereum logic out of your app as much as possible. This way you just write and read from your reactive collections and the observe functions will handle the rest (e.g. sendTransactions)
+- put vapory related stuff into `client/lib/vapory/somefile.js`
+- use `myCollection.observe({added: func, changed: func, removed: func})` to communicate to vapory, keep vapory logic out of your app as much as possible. This way you just write and read from your reactive collections and the observe functions will handle the rest (e.g. sendTransactions)
 - Filters etc will add logs etc to your collections. So you keep all the callback mess out of your app logic.
 
-For an example see the [Ethereum-Wallet](https://github.com/ethereum/meteor-dapp-wallet).
+For an example see the [Vapory-Wallet](https://github.com/vaporyco/meteor-dapp-wallet).
 
 ## Bundle your Ðapp
 
